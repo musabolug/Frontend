@@ -1,0 +1,43 @@
+header{
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+}
+a{
+    margin-left: 30px;
+}
+.jumbotron{
+    text-align-last: center;
+}
+ul{
+    display: inline-block;
+}
+li{
+    text-align-last: left;
+}
+.header1{
+    margin-top: 10px;
+    text-align-last: center;
+    color: blueviolet;
+    font-size: 50px;
+}
+.content{
+    margin-left: 10px;
+    
+}
+body{
+    background-color: #E9ECEF;
+}
+.price{
+    color: white;
+    background-color: gray;
+    border-radius: 25px;
+    width: 75px;
+   text-align-last: center;
+}
+.card{
+    margin-top: 10px;
+}
+.center{
+    text-align-last:center ;
+}
