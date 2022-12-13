@@ -1,0 +1,76 @@
+.head{
+    height: 200px;
+}
+.headRight{
+    float: right;
+}
+.solKay{
+    margin-left: 10px;
+}
+.clearfix{
+    clear: both;
+}
+.a{
+    float: left;
+    margin-right: 10px;
+}
+.forImg{
+text-align: center;
+margin-top: -52px;
+margin-left: 10px;
+}
+.forInputDiv{
+    height: 72px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 500px;
+}
+.outInput{
+    display: flex;
+    justify-content: space-between;
+    outline: none;
+
+    background: #fff;
+    border: 1px solid #dfe1e5;
+    border-radius: 12px;
+    width: 480px;
+    height: 32px;
+
+}
+.outInput:hover{
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
+  border-style: groove;
+}
+.IamInput{
+    border:none;
+    outline:none;
+}
+.divofButtons{
+    text-align: center;
+}
+.buttons{
+    background-color: #F8F9FA;
+    border: #F8F9FA;
+    border:solid 1px #F8F9FA ;
+    border-radius: 5px;
+    height: 36px;
+
+    font-family: Arial,HElvetica,sans-serif;
+    color: #5f6368;
+    font-size: 14px;
+
+}
+.buttons:hover{
+    box-shadow:0 2px 3px 0 rgba(0, 0, 0, 0,24), 0 2px 5px 0 rgba(0,0,0,0.19) ;
+    cursor: pointer;
+}
+.forFooter{
+    background-color: #f2f2f2;
+    padding: 5px;
+    margin-top: 329px;
+    height: 40px;
+    width: auto;
+    font-size: 14px;
+    color: #5f6368;
+    font-family:Arial, Helvetica, sans-serif ;
+}

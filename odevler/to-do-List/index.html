@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="upside">
+        <img class="logo" width="400px" src="C:\Users\musab\Desktop\yazilim\Frontend\img\logo-one.png" alt="logo">
+        <h1 class="header">Yapılacaklar Listesi</h1>
+   
+        <div>
+            <input type="text" id="task" placeholder="Bugün ne yapacaksınız?">
+            <span onclick="newElement()" id="liveToastBtn" class="button">Ekle</span>
+            </div>
+    </div>
+        <div>
+            <ul id="list" class="list">
+                <li>3 litre su iç</li>
+                <li>Ödevlerini yap</li>
+                <li>En az 3 saat kodlama yap</li>
+                <li>Yemek yap</li>
+                <li>50 sayfa kitap oku </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+body{
+    text-align-last: center;
+
+}
+ul{
+    display: inline-block;
+}
+li{
+    text-align-last: left;
+}
+.upside{
+    background-color: darkorange;
+}
+.header{
+    color: white;
+}
+.logo{
+    background-color: white;
+}
+.upside{
+    
+}

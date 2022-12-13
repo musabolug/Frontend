@@ -1,0 +1,48 @@
+/********* Layout **********/
+/* class -> .class-bilgisi {}*/
+/* id -> .id-bilgisi {}*/
+
+/* css selectors */
+
+li:last-child{
+    color:aqua ;
+} 
+
+li:first-child{
+    color:green
+}
+
+li:nth-child(2){
+    color: red;
+}
+li:nth-child(odd){  /*listenin tek sayılı elemanlarını etkiler*/
+    color: red;
+}
+li:nth-child(even){  /*listenin çift sayılı elemanlarını etkiler*/
+    color: red;
+}
+
+
+h1 , h2 , h3 , h4 , h5 , h6{
+color: #202020; 
+}
+h1{
+    font-size: large;
+}
+
+.text-red{
+    color: red;
+}
+#first-article {
+
+}
+
+.fs-small{
+    font-size: 14px;
+}
+.fs-medium{
+font-size: 20px;
+}
+.fs-large{
+font-size: 30px;
+}
