@@ -1,0 +1,22 @@
+.bg-yellow{
+    background-color: #FFC017;
+}
+    
+.border-bottom1{
+    border-bottom: 1px solid rgba(41,41,41,1);
+}
+body{
+    font-family: 'Courgette', cursive;
+    font-family: 'PT Serif', serif;
+}
+.button5{
+    border-radius: 100px
+}
+.aside-buttons>li{
+    margin-bottom: 10px;
+    
+}
+
+.border-top-dark{
+    border-top:1px solid rgba(230, 230, 230, 1) ;
+}
