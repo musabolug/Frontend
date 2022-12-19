@@ -1,22 +1,108 @@
+*{
+    box-sizing: border-box;
+}
 body{
     text-align-last: center;
-
 }
 ul{
-    display: inline-block;
+    margin: 0;
+    padding: 0;
 }
-li{
-    text-align-last: left;
+ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background-color: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+    list-style-type: none;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
 }
-.upside{
-    background-color: darkorange;
+ul li:nth-child(odd){
+    background-color: #f9f9f9;
+}
+ul li:hover{
+    background-color: #ddd;
+}
+ul li.checked{
+    background: #276678;
+    color: #fff;
+    text-decoration: line-through;
+}
+ul li:checked::before{
+    content: "";
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+}
+
+.logo{
+    margin-top: 30px;
+    background-color: white;
+    width: 400px;
 }
 .header{
+    background-color: darkorange;
+    padding: 30px 40px;
+    text-align: center;
+}
+.header::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.close{
+
+}
+.input{
+    padding-bottom: 40px;
+}
+
+.task{
+    border: none;  
+    border-radius: 0px;
+    width: 75%;
+    margin: 0px;
+    padding: 10px;
+    float: center;
+    font-size: 16px;
+}
+.button{
+    background-color: #d9d9d9;
+    margin-left: 0px;
+    padding:  10px;
+    width: 25%;
+    float: right;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+}
+.button:hover{
+    background-color: #bbb;
+}
+
+.close{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+.clsoe:hover{
+    background-color: #f78501;
     color: white;
 }
-.logo{
-    background-color: white;
-}
-.upside{
-    
+.toDoOkey{
+    background-color: palevioletred !important;
+    text-decoration: line-through;
 }
