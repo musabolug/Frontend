@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Electrolize&family=Great+Vibes&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Poppins:wght@100;300;400;500;600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #dff9fb;
+    font-family: "Zilla Slab", serif;
+  }
+.container{
+    text-align-last: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.heading{
+    font-family: 'Great Vibes', cursive;
+    color: #ff6a23;
+    font-size: 3rem;
+}
+.btn-container{
+    margin: 40px 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.btn-item{
+    cursor: pointer;
+    margin-left: 15px;
+}
+.menu{
+    margin-top: 20px;
+}
+.photo{
+    width: 30%;
+    height: 175px;
+    object-fit: cover;
+    border: 0.25rem solid black;
+    border-radius: 10px;
+}
+.menu-items{
+    display: flex;
+    margin: 20px 0;
+}
+.menu-info{
+    margin-left: 20px;
+    width: 100%;
+}
+.menu-title{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+h4{
+    color: #e00a00;
+}
+.menu-text{
+    padding-top: 20px;
+    text-align: left;
+}
