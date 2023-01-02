@@ -3,16 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
-// import App_sttyle from './App_sttyle';
-// import App_route from './App_route';
-// import App_memoization from './App_memoization';
-import App_context from './App_context';
-import { ThemeContext, ThemeProvider } from './Context/ThemeContext';
-
+import App from './components/App';
+// import App from './datatable/Application';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App_context />
+    <App />
   </React.StrictMode>
 );
 

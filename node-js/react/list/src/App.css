@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+}
+
+body{
+  background-color: rgb(31, 31, 31);
+}
+.filter{
+  color: white;
+  margin: 10px;
+}
+.filter > label{
+  margin: 10px;
+
+}
+th{
+  cursor: pointer;
+}
