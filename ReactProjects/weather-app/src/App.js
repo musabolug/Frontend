@@ -48,6 +48,7 @@ function  App(){
     console.log(forecastData)
    }
   
+   
   
   return (
     <div className="app col">
@@ -116,7 +117,19 @@ function  App(){
       <div className="card-body">
       { forecastData.list ? <h5 className="card-title">{forecastData.list[1].dt_txt}</h5> : null}
       {forecastData.list ? <p className="card-text">{forecastData.list[1].main.temp_min.toFixed() }°C / { forecastData.list[1].main.temp_max.toFixed()  }°C</p> : null}
-      {forecastData.list ?  <p><span>{forecastData.list[1].weather[0].description}</span></p>: null}
+      {forecastData.list ?  <p className="desc" >{forecastData.list[1].weather[0].description}
+      <div className="icons">
+      { forecastData.list[1].weather[0].description === "clear sky"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudSun}></FontAwesomeIcon>: null}
+      { forecastData.list[1].weather[0].description === "scattered clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[1].weather[0].description === "light rain"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudRain}></FontAwesomeIcon>: null}
+      { forecastData.list[1].weather[0].description === "few clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudSun}></FontAwesomeIcon>: null}
+      { forecastData.list[1].weather[0].description === "overcast clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[1].weather[0].description === "broken clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[1].weather[0].description === "moderate rain"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudRain}></FontAwesomeIcon>: null}
+      { forecastData.list[1].weather[0].description === "light snow"?   <FontAwesomeIcon className="iconsBottom" icon={faSnowflake}></FontAwesomeIcon>: null}
+      { forecastData.list[1].weather[0].description === "snow"?   <FontAwesomeIcon className="iconsBottom" icon={faSnowflake}></FontAwesomeIcon>: null}
+      </div>
+      </p>: null}
       </div>
     </div>
   </div>
@@ -125,7 +138,19 @@ function  App(){
       <div className="card-body">
       {forecastData.list ?   <h5 className="card-title">{forecastData.list[9].dt_txt}</h5>: null}
       {forecastData.list ? <p className="card-text">{forecastData.list[9].main.temp_min.toFixed()}°C / { forecastData.list[9].main.temp_max.toFixed() }°C</p>: null}
-      {forecastData.list ?  <p><span>{forecastData.list[9].weather[0].description}</span></p>: null}
+      {forecastData.list ?  <p className="desc">{forecastData.list[9].weather[0].description}
+      <div className="icons">
+      { forecastData.list[9].weather[0].description === "clear sky"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudSun}></FontAwesomeIcon>: null}
+      { forecastData.list[9].weather[0].description === "scattered clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[9].weather[0].description === "light rain"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudRain}></FontAwesomeIcon>: null}
+      { forecastData.list[9].weather[0].description === "few clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudSun}></FontAwesomeIcon>: null}
+      { forecastData.list[9].weather[0].description === "overcast clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[9].weather[0].description === "broken clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[9].weather[0].description === "moderate rain"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudRain}></FontAwesomeIcon>: null}
+      { forecastData.list[9].weather[0].description === "light snow"?   <FontAwesomeIcon className="iconsBottom" icon={faSnowflake}></FontAwesomeIcon>: null}
+      { forecastData.list[9].weather[0].description === "snow"?   <FontAwesomeIcon className="iconsBottom" icon={faSnowflake}></FontAwesomeIcon>: null}
+      </div>
+      </p>: null}
       </div>
     </div>
   </div>
@@ -134,7 +159,19 @@ function  App(){
       <div className="card-body">
       {forecastData.list ?<h5 className="card-title">{forecastData.list[17].dt_txt}</h5>: null}
       {forecastData.list ?  <p className="card-text">{forecastData.list[17].main.temp_min.toFixed() }°C / {forecastData.list[17].main.temp_max.toFixed()  }°C</p>: null}
-      {forecastData.list ?   <p><span>{forecastData.list[17].weather[0].description}</span></p>: null}
+      {forecastData.list ?   <p className="desc" >{forecastData.list[17].weather[0].description}
+      <div className="icons">
+      { forecastData.list[17].weather[0].description === "clear sky"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudSun}></FontAwesomeIcon>: null}
+      { forecastData.list[17].weather[0].description === "scattered clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[17].weather[0].description === "light rain"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudRain}></FontAwesomeIcon>: null}
+      { forecastData.list[17].weather[0].description === "few clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudSun}></FontAwesomeIcon>: null}
+      { forecastData.list[17].weather[0].description === "overcast clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[17].weather[0].description === "broken clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[17].weather[0].description === "moderate rain"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudRain}></FontAwesomeIcon>: null}
+      { forecastData.list[17].weather[0].description === "light snow"?   <FontAwesomeIcon className="iconsBottom" icon={faSnowflake}></FontAwesomeIcon>: null}
+      { forecastData.list[17].weather[0].description === "snow"?   <FontAwesomeIcon className="iconsBottom" icon={faSnowflake}></FontAwesomeIcon>: null}
+      </div>
+      </p>: null}
       </div>
     </div>
   </div>
@@ -143,7 +180,19 @@ function  App(){
       <div className="card-body">
       { forecastData.list ? <h5 className="card-title">{forecastData.list[25].dt_txt}</h5>: null}
       {forecastData.list ?  <p className="card-text">{forecastData.list[25].main.temp_min.toFixed() }°C / {forecastData.list[25].main.temp_max.toFixed()  }°C</p>: null}
-      { forecastData.list ?  <p><span>{forecastData.list[25].weather[0].description}</span></p>: null}
+      { forecastData.list ?  <p className="desc">{forecastData.list[25].weather[0].description}
+      <div className="icons">
+      { forecastData.list[25].weather[0].description === "clear sky"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudSun}></FontAwesomeIcon>: null}
+      { forecastData.list[25].weather[0].description === "scattered clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[25].weather[0].description === "light rain"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudRain}></FontAwesomeIcon>: null}
+      { forecastData.list[25].weather[0].description === "few clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudSun}></FontAwesomeIcon>: null}
+      { forecastData.list[25].weather[0].description === "overcast clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[25].weather[0].description === "broken clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[25].weather[0].description === "moderate rain"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudRain}></FontAwesomeIcon>: null}
+      { forecastData.list[25].weather[0].description === "light snow"?   <FontAwesomeIcon className="iconsBottom" icon={faSnowflake}></FontAwesomeIcon>: null}
+      { forecastData.list[25].weather[0].description === "snow"?   <FontAwesomeIcon className="iconsBottom" icon={faSnowflake}></FontAwesomeIcon>: null}
+      </div>
+      </p>: null}
       </div>
     </div>
   </div>
