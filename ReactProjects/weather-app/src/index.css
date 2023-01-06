@@ -11,12 +11,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
+  height: 120vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.card-body{
+
 }
 p{
   font-size: 1.6rem;
@@ -33,7 +36,6 @@ h1{
 
 .app:before{
 content: "";
-
 background:url("./assets/cloudy.jpg")  center/cover  ;
 position: absolute;
 width: 100%;
@@ -42,15 +44,7 @@ top: 0;
 left: 0;
 z-index: -1;
 }
-/* .background{
-  content: "";
-  z-index: -1;
-  width: 100%;
-height: 100%;
-top: 0;
-left: 0;
-position: absolute;
-} */
+
 
 .app .search{
   text-align: center;
@@ -64,21 +58,36 @@ position: absolute;
   background: rgba(255,255,255,0.1);
 
 }
-
+.temp{
+  display: inline-flex;
+}
+.icon{
+  padding-left: 170px;
+height: 90px;
+}
+.iconsBottom{
+  height: 30px;
+  padding-left: 20px;
+}
+.desc{
+  display: flex;
+}
 ::placeholder{
   color: #f8f8f8;
 }
 .container{
   max-width: 700px;
-  height: 700px;
+  height: 1000px;
   margin: auto;
   padding: 0 1rem;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
-
+.card{
+  background-color: rgba(255,255,255,0.2);
+margin: 10px 3px 10px 3px;
+}
 .app .top{
   width: 100%;
   margin: 1rem auto;

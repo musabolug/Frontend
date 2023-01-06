@@ -1,47 +1,52 @@
-import React, {useState,useEffect} from "react"
-// import './App.css';
+import React, {useState,useEffect, useCallback} from "react"
 import axios from "axios"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import {faCloud} from "@fortawesome/free-solid-svg-icons"
+import {faCloudRain} from "@fortawesome/free-solid-svg-icons"
+import {faCloudSun} from "@fortawesome/free-solid-svg-icons"
+import {faSnowflake} from "@fortawesome/free-solid-svg-icons"
+
 import "./index.css";
-import Forecast from "./Forecast";
-function App() {
+function  App(){
   const [forecastData,setForecastData] = useState({})
   const [data,setData] =useState({})
   const [location,setLocation] = useState("")
-  
+  let sayac =0
+  const forecast = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=f0372c7cac2bf40519e3ae0a97c08428&units=metric`
   const API_KEY = "f0372c7cac2bf40519e3ae0a97c08428&"
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=f0372c7cac2bf40519e3ae0a97c08428&units=metric`
   const searchLocation = async(event) => {
     if(event.key === "Enter"){
-     await axios.get(url).then((response) =>{
+      sayac += 1
+   await axios.get(url).then((response) =>{
         setData(response.data)
         console.log(response.data)
-        const forecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&appid=f0372c7cac2bf40519e3ae0a97c08428&units=metric`
+        // const forecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=f0372c7cac2bf40519e3ae0a97c08428&units=metric`
         axios.get(forecast).then((response)=>{
-          setForecastData(response.data)
-          
+        setForecastData(response.data)
+          console.log(response.data)
         })
         console.log(forecastData)
-        
-    //         React.useEffect(() =>{
-    //     axios.get(forecast).then((response) =>{
-    //         setForecastData(response.data)
-    //         console.log(response.data)
-    //     });
-    // },[]);
       } 
       )
           setLocation("")
+          setForecast();
+          console.log(sayac)
     }
+      
       }
-     
-
-
-    // React.useEffect(() =>{
-    //     axios.get(forecastData).then((response) =>{
-    //         setForecastData(response.data)
-    //         console.log(response.data)
-    //     });
-    // },[]);
+   
+   const setForecast = async() =>{
+   await axios.get(forecast).then((response =>{
+      setForecastData(response.data);
+      console.log(response.data)
+      console.log(forecastData)
+      setTimeout({
+        searchLocation  
+      },2000)
+    }))
+    console.log(forecastData)
+   }
   
   
   return (
@@ -64,13 +69,18 @@ function App() {
         </div>
         <div className="temp">
           {data.main ?<h1>{data.main.temp.toFixed()}°C </h1>: null }
+          <div className="icon">
+      {data.weather?.[0].main ==="Clouds" ?  <FontAwesomeIcon className="icon" icon={faCloud}></FontAwesomeIcon>  : null }
+      {data.weather?.[0].main ==="Mist" ?  <FontAwesomeIcon className="icon" icon={faCloud}></FontAwesomeIcon>  : null }
+      {data.weather?.[0].main ==="Rain" ?  <FontAwesomeIcon className="icon" icon={faCloudRain}></FontAwesomeIcon>  : null }
+      {data.weather?.[0].main ==="Clear" ?  <FontAwesomeIcon className="icon" icon={faCloudSun}></FontAwesomeIcon>  : null }
+      {data.weather?.[0].main ==="Snow" ?  <FontAwesomeIcon className="icon" icon={faSnowflake}></FontAwesomeIcon>  : null }
+      </div>
         </div>
         <div className="description">
           {data.weather ?<p>{data.weather[0].main}</p>  : null }
-          
         </div>
     
-
       </div>  
       {data.name != undefined &&
       <div className="bottom">
@@ -100,51 +110,65 @@ function App() {
     }
     
     {/* <Forecast data={forecastData}/> */}
-    {/* <div class="row">
-  <div class="col-sm-2 mb-3 mb-sm-0">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{forecastData.list[0].dt_txt}</h5>
-        <p class="card-text">{forecastData.list[0].main.temp_min / forecastData.list[0].main.temp_max  }</p>
-        <p><span>{forecastData.list[0].weather.description}</span></p>
+  { forecastData.list != undefined && <div className="row">
+  <div className="col-sm-4 mb-3 mb-sm-0 ">
+    <div className="card">
+      <div className="card-body">
+      { forecastData.list ? <h5 className="card-title">{forecastData.list[1].dt_txt}</h5> : null}
+      {forecastData.list ? <p className="card-text">{forecastData.list[1].main.temp_min.toFixed() }°C / { forecastData.list[1].main.temp_max.toFixed()  }°C</p> : null}
+      {forecastData.list ?  <p><span>{forecastData.list[1].weather[0].description}</span></p>: null}
       </div>
     </div>
   </div>
-  <div class="col-sm-2">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{forecastData.list[1].dt_txt}</h5>
-        <p class="card-text">{forecastData.list[1].main.temp_min / forecastData.list[1].main.temp_max  }</p>
-        <p><span>{forecastData.list[1].weather.description}</span></p>
+  <div className="col-sm-4">
+    <div className="card">
+      <div className="card-body">
+      {forecastData.list ?   <h5 className="card-title">{forecastData.list[9].dt_txt}</h5>: null}
+      {forecastData.list ? <p className="card-text">{forecastData.list[9].main.temp_min.toFixed()}°C / { forecastData.list[9].main.temp_max.toFixed() }°C</p>: null}
+      {forecastData.list ?  <p><span>{forecastData.list[9].weather[0].description}</span></p>: null}
       </div>
     </div>
   </div>
-  <div class="col-sm-2">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">forecastData.list[2].dt_txt</h5>
-        <p class="card-text">{forecastData.list[2].main.temp_min / forecastData.list[2].main.temp_max  }</p>
-        <p><span>{forecastData.list[2].weather.description}</span></p>
+  <div className="col-sm-4">
+    <div className="card">
+      <div className="card-body">
+      {forecastData.list ?<h5 className="card-title">{forecastData.list[17].dt_txt}</h5>: null}
+      {forecastData.list ?  <p className="card-text">{forecastData.list[17].main.temp_min.toFixed() }°C / {forecastData.list[17].main.temp_max.toFixed()  }°C</p>: null}
+      {forecastData.list ?   <p><span>{forecastData.list[17].weather[0].description}</span></p>: null}
       </div>
     </div>
   </div>
-  <div class="col-sm-2">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">forecastData.list[3].dt_txt</h5>
-        <p class="card-text">{forecastData.list[3].main.temp_min / forecastData.list[3].main.temp_max  }</p>
-        <p><span>{forecastData.list[3].weather.description}</span></p></div>
+  <div className="col-sm-6">
+    <div className="card">
+      <div className="card-body">
+      { forecastData.list ? <h5 className="card-title">{forecastData.list[25].dt_txt}</h5>: null}
+      {forecastData.list ?  <p className="card-text">{forecastData.list[25].main.temp_min.toFixed() }°C / {forecastData.list[25].main.temp_max.toFixed()  }°C</p>: null}
+      { forecastData.list ?  <p><span>{forecastData.list[25].weather[0].description}</span></p>: null}
+      </div>
     </div>
   </div>
-  <div class="col-sm-2">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">forecastData.list[4].dt_txt</h5>
-        <p class="card-text">{forecastData.list[4].main.temp_min / forecastData.list[4].main.temp_max  }</p>
-        <p><span>{forecastData.list[4].weather.description}</span></p></div>
+  <div className="col-sm-6">
+    <div className="card">
+      <div className="card-body">
+      { forecastData.list ? <h5 className="card-title">{forecastData.list[33].dt_txt}</h5>: null}
+      { forecastData.list ? <p className="card-text">{forecastData.list[33].main.temp_min.toFixed() }°C / { forecastData.list[33].main.temp_max.toFixed()  }°C</p>: null}
+      { forecastData.list ?  <p className="desc">{forecastData.list[33].weather[0].description}
+      <div className="icons">
+      { forecastData.list[33].weather[0].description === "clear sky"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudSun}></FontAwesomeIcon>: null}
+      { forecastData.list[33].weather[0].description === "scattered clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[33].weather[0].description === "light rain"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudRain}></FontAwesomeIcon>: null}
+      { forecastData.list[33].weather[0].description === "few clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudSun}></FontAwesomeIcon>: null}
+      { forecastData.list[33].weather[0].description === "overcast clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[33].weather[0].description === "broken clouds"?   <FontAwesomeIcon className="iconsBottom" icon={faCloud}></FontAwesomeIcon>: null}
+      { forecastData.list[33].weather[0].description === "moderate rain"?   <FontAwesomeIcon className="iconsBottom" icon={faCloudRain}></FontAwesomeIcon>: null}
+      { forecastData.list[33].weather[0].description === "light snow"?   <FontAwesomeIcon className="iconsBottom" icon={faSnowflake}></FontAwesomeIcon>: null}
+      { forecastData.list[33].weather[0].description === "snow"?   <FontAwesomeIcon className="iconsBottom" icon={faSnowflake}></FontAwesomeIcon>: null}
+      </div>
+      </p> : null}
+      </div>
     </div>
   </div>
-</div> */}
+  </div>}
     </div>
     </div>
   );
