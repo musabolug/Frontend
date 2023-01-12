@@ -1,51 +1,26 @@
-import {useState} from 'react'
-import * as emoji from "emoji-api";
-
-// const defaultItems = [
-//     Emoji, {
-//         _data: {
-//           emoji: '🥺',
-//           name: 'pleading face',
-//           group: 'Smileys & Emotion',
-//           sub_group: 'face-concerned',
-//           codepoints: '1F97A'
-//         }
-//       }
-// ]
-
-/**
- *! Find emoji by name
- *! @param name The emoji name
- 
-*!export function findByName(name: string): Emoji | null {
-  *!  const found = all().find(e => e.name.toLowerCase() === name.toLowerCase());
-    *!return found || null;}
-*! https://github.com/skdhg/emoji-api/blob/main/src/index.ts
-*/
-
+import {useEffect, useState} from 'react'
+import Emojies from "../emoji.json"
+import "../App.css"
 function Emoji() {
-    const emoji = require("emoji-api");
-    const [text,setText] = useState("");
-    const [items,setItems] = useState(emoji);
+        const [text,setText] = useState("");
+        const [data,setData] = useState([])
+    // const [items,setItems] = useState(Emojies);
+    useEffect(() =>{
+        const newData = Emojies.filter(emoji => emoji.title.toLowerCase().includes(text.toLowerCase())) 
+        setData(newData);
+    },[text])
   return (
     <div>   
-        <h1>Emoji Search</h1>
-        <label >Filter<input value={text} onChange={(e) => setText(e.target.value)} /></label>
-        <ul className='list-group'>
-                {/* <li className='list-group-item'>{items.Emoji[0]._data.emoji}</li>
-                <li className='list-group-item'>{items.Emoji[1]._data.emoji}</li>
-                <li className='list-group-item'>{items.Emoji[2]._data.emoji}</li>
-                <li className='list-group-item'>{items.Emoji[3]._data.emoji}</li>
-                <li className='list-group-item'>{items.Emoji[4]._data.emoji}</li>
-                <li className='list-group-item'>{items.Emoji[5]._data.emoji}</li> */}
-                console.log(emoji.)
-        </ul>
-
-        {
-            console.log(emoji.all())
-        }
+        <h1 className='App'>Emoji Search</h1>
+        <input  style={{marginTop: 10, marginBottom: 20}} value={text} onChange={(e) => setText(e.target.value)} placeholder = "Search" />
+        <div className="container">
+        {data.map(emoji => <div className='card '><div className="card-body ">{emoji.symbol} {emoji.title}</div></div>)}
+        </div>
     </div>
   )
 }
 
 export default Emoji
+
+
+
