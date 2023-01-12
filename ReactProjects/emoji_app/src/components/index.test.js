@@ -1,4 +1,4 @@
-import {render,screen}from "@testing-library/react"
+import {fireEvent, render,screen}from "@testing-library/react"
 
 import userEvent from "@testing-library/user-event"
 
@@ -10,10 +10,10 @@ describe("Emoji Search testleri",() =>{
 
     test("Arama yapıldığında filtrelenmeli", () =>{
         render(<Emoji />)
-        input = screen.getByPlaceholderText("Search")
-        const input = "Smile"
-        userEvent.type(input);
+        input = screen.getByTitle("input")
+        const emoji = "Smile"
+        fireEvent.change(input,{target:{value:emoji}})
 
-        expect(screen.getByText(input)).toBeInTheDocument();
+        expect(screen.getByText(emoji)).toBeInTheDocument();
     })
 })
