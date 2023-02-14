@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {addTodoAsync} from "../redux/todos/todosSlice"
+import {addTodoAsync} from "../redux/todos/services"
 import Loading from "./Loading"
 function Form() {
 const [title,setTitle] = useState("");
