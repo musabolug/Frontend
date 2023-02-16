@@ -1,0 +1,151 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main{
+    width: 100%;
+    height: 100vh;
+}
+
+#videoBg{
+    position: fixed;
+    z-index: -1;
+}
+@media (min-aspect-ratio: 16/9){
+    #videoBg{
+        width:100% ;
+        height: auto;
+    }
+}
+@media (max-aspect-ratio: 16/9){
+    #videoBg{
+        width:auto ;
+        height: 100%;
+    }
+}
+@media (max-width: 767px){
+    #videoBg{
+        display: none;
+    }
+    body {
+        background: url('./components/background/imgBg.jpg');
+        background-size: cover;
+    }
+}
+/* .overlay{    
+   width: 100%;
+   height: 100%;
+    background-color: rgba(0,0, 0,0.4);
+    top: 0;
+    left: 0;
+    position: absolute;
+} */
+.header{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    outline: none;
+}
+::placeholder{
+    margin-left: 15;
+    color: white;
+
+}
+.search{
+    margin-top: 10px;
+    outline: none;
+    padding: 20px;
+    width: 400px;
+    height: 40px;
+    border-radius: 16px;
+    background-color: rgb(104, 4, 94);
+    border-color: rgb(104, 4, 94);
+    color: white;
+    font-size: large;
+}
+.content{
+    margin-bottom: 200px;
+    position : absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: blueviolet;
+   
+}
+.title{
+    width: 340px;
+    height: 35px;
+    margin-right: 20px;
+    border-radius: 16px;
+    color: white;
+    font-size: medium;
+    padding: 20px;
+    outline: none;
+}
+.color-div{
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+.color{
+    margin-top: 20px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 30px;
+    margin-right: 5px;
+    width: 30px; 
+}
+.color:hover{
+    border: black solid 2px;
+
+}
+.note{
+    font-size: large;
+    padding-top: 20px;
+    margin-top: 20px;
+    display: block;
+    width: 400px;
+    height:200px;
+    background-color: rgb(104, 4, 94);
+    border-radius: 16px;
+    padding-left: 20px;
+   color: white;
+   outline: none;
+}
+.form{
+    margin-top: 25px;
+}
+
+
+
+.notes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.writed-note{
+    border-radius: 16px;
+    width: 250px;
+    height: 250px;
+    padding: 10px;
+    background-color: #F8F9D7;
+    box-shadow: -3px 3px 11px -3px rgba(0,0,0,0.75);
+    margin: 20px 5px;
+    color: white;
+    position: relative;
+    overflow: auto;
+  }
+  .delete-note{
+    float: right;
+    font-size: small;
+  }

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import {getTodosAsync,addTodoAsync,toggleTodoAsync,removeTodoAsync} from "./services"
+import {getTodosAsync,addTodoAsync,toggleTodoAsync,removeTodoAsync,clearCompletedTodosAsync} from "./services"
 
 export const todoSlice = createSlice({
   name: "todos",
@@ -16,7 +16,7 @@ export const todoSlice = createSlice({
   },
 
   reducers: {
-    // togg le: (state,action) =>{
+    // toggle: (state,action) =>{
     //     const {id} = action.payload;
 
     //     const item = state.items.find(item => item.id === id);
@@ -31,10 +31,10 @@ export const todoSlice = createSlice({
     changeActiveFilter: (state, action) => {
       state.activeFilter = action.payload;
     },
-    clearCompleted: (state) => {
-      const filtered = state.items.filter((item) => item.completed === false);
-      state.items = filtered;
-    },
+    // clearCompleted: (state) => {
+    //   const filtered = state.items.filter((item) => item.completed === false);
+    //   state.items = filtered;
+    // },
   },
   extraReducers: {
     //get todos
@@ -75,6 +75,11 @@ export const todoSlice = createSlice({
       // const filtered = state.items.filter((item) => item.id !== id);
       // state.items = filtered;
     },
+    // clear completed todos
+    [clearCompletedTodosAsync.fulfilled]:(state) =>{
+     state.items=  state.items.filter((item) => item.completed === false);
+      // state.items = filtered;
+    }
   },
 });
 export const selectTodos = (state) => state.todos.items;
@@ -89,5 +94,5 @@ export const selectFilteredTodos = (state) => {
       : todo.completed === true
   );
 };
-export const { changeActiveFilter, clearCompleted } = todoSlice.actions;
+export const { changeActiveFilter } = todoSlice.actions;
 export default todoSlice.reducer;

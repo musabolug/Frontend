@@ -39,3 +39,12 @@ export const getTodosAsync = createAsyncThunk(
       return id;
     }
   );
+  export const clearCompletedTodosAsync = createAsyncThunk(
+    "todos/clearCompletedTodosAsync",
+    async() =>{
+       await axios.post(
+        `${process.env.REACT_APP_API_BASE_ENDPOINT}/todos`
+      );
+    
+    }
+  )
