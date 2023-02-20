@@ -1,0 +1,62 @@
+h1 {
+    font-size: 28px;
+    padding: 15px 15px 25px;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .receiptBorder h1 {
+    margin-top: 1.5rem;
+    margin-right: 40px;
+  }
+  
+  .totalName {
+    font-weight: 700;
+    max-width: 300px;
+    border-top: 1px solid #333;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    padding-top: 10px;
+    display: flex;
+  }
+  
+  .receiptLine {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .receiptPrice {
+    color: #24c486;
+    font-weight: 700;
+  }
+  
+  .totalPrice {
+    color: #24c486;
+    font-weight: 700;
+    margin-left: 240px;
+  }
+  
+  .receiptCount {
+    text-align: initial;
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .receiptBorder {
+      margin-bottom: 30px;
+    }
+  }
+  
+  @media screen and (min-width: 10px) and (max-width: 770px) {
+    .receiptBorder {
+      margin-left: 150px;
+      position: relative;
+    }
+  }
+  
+  @media screen and (min-width: 770px) and (max-width: 1200px) {
+    .receiptBorder {
+      margin-right: 300px;
+      position: relative;
+    }
+  }

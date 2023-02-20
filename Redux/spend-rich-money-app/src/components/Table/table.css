@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+  }
+  .budget {
+    background-color: #2ecc71;
+    padding: 20px;
+    margin: 8px;
+    font-size: 32px;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    margin-left: -10px;
+    margin-right: -7px;
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .centerMoney {
+      color: #fff;
+      background-color: #2ecc71;
+      background: linear-gradient(180deg, #2ecc71, #1abc9c);
+      padding: 20px;
+      margin: 10px 83px 10px 87px;
+      font-family: Roboto, sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      text-align: center;
+      top: 0;
+      position: sticky;
+      z-index: 1;
+      margin-bottom: 1.5rem;
+      left: 10px;
+    }
+  }
+  
+  @media screen and (min-width: 10px) and (max-width: 1200px) {
+    .centerMoney {
+      color: #fff;
+      background-color: #2ecc71;
+      background: linear-gradient(180deg, #2ecc71, #1abc9c);
+      padding: 20px;
+      font-family: Roboto, sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      margin-left: 100px;
+      width: 479px;
+      top: 0;
+      position: sticky;
+      z-index: 1;
+      margin: 0 80px 25px 88px;
+    }
+  }
+  
+  .containerProduct {
+    width: 1150px;
+    margin-left: 75px;
+  }

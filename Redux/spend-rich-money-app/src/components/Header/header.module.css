@@ -1,0 +1,9 @@
+.header{
+    padding-top: 30px;
+    text-align: center;
+}
+.profile{
+    border-radius: 50%;
+    width: 300px;
+    height:300px;
+}
