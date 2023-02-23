@@ -2,6 +2,21 @@
     color: #2761c3 ;
 
 }
+.container{
+  margin-top: 20px;
+}
+.col{
+  margin: 5px;
+  
+}
+#btnControl{
+  display: none;
+}
+.card{
+  background: none;
+  border: none;
+  }
+
 .crown{
     width: 150px;
     height: 150px;
@@ -36,7 +51,7 @@
     transform-style: preserve-3d;
   }
   
-  .flip-card .flip-card-inner {
+  .flip-card-inner {
     transform: rotateY(180deg);
   }
   
@@ -58,6 +73,7 @@
     background: linear-gradient(120deg, bisque 60%, rgb(255, 231, 222) 88%,
        rgb(255, 211, 195) 40%, rgba(255, 127, 80, 0.603) 48%);
     color: coral;
+    height: 238px;
   }
   
   .flip-card-back {

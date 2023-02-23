@@ -1,0 +1,33 @@
+
+h1{
+  display: block;
+  text-align: center;
+}
+
+.App{
+ width: 900px;
+ color: #0470ab;
+ text-align: center;
+  justify-content: center;
+ /* margin-left: 350px; */
+margin-top: 20px;
+display: inline-block;
+}
+html{
+  background-color: #93BFCF;
+}
+#root{
+  color: #2761c3 ;
+  text-align: center;
+  background-color: #93BFCF;
+
+}
+.table{
+  
+margin-top: 20px;
+margin-bottom: 20px;
+
+}
+.bgColor{
+    background: #BDCDD6;
+}
