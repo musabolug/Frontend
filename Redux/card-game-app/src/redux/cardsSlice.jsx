@@ -13,8 +13,8 @@ const cardsSlice = createSlice({
         cards:[],
         activeCards:[],
         status:"",
-        beginScore: 100,
-        correctMatch:50,
+        beginScore: 200,
+        correctMatch:40,
         wrongMatch:20,
         closedCards:24,
         openedCards:0,
@@ -24,12 +24,12 @@ const cardsSlice = createSlice({
         fillCards: (state)=>{
             state.cards = setCards();
         },
-        resetGame: (state,action) =>{
+        resetGame: (state) =>{
             state.cards=[];
             state.activeCards=[];
             state.status="";
-            state.beginScore= 100;
-            state.correctMatch=50;
+            state.beginScore= 200;
+            state.correctMatch=40;
             state. wrongMatch=20;
             state.closedCards=24;
               state.openedCards=0;
@@ -47,20 +47,25 @@ const cardsSlice = createSlice({
                 state.activeCards = [];
         },
         correctMatch: (state) =>{
-            state.beginScore += state.correctMatch;
+            state.beginScore = (state.beginScore + state.correctMatch ) ;
             state.openedCards += 2;    
             state.closedCards -= 2;
             state.activeCards = [];
             state.status = "success";
+            
         },
-        falseMatch: ( state)=>{
+        falseMatch: (state)=>{
             state.beginScore -= state.wrongMatch
             state.activeCards = [];
             state.status = "fail";
             
+        },
+        setMatch: (state, action) =>{
+            const card =state.cards.find((sultan) => sultan.id === action.payload);
+            card.matched = true
         }
     },
 })
 
-export const {fillCards,resetGame,openCard,closeCard,correctMatch,falseMatch} = cardsSlice.actions;
+export const {fillCards,resetGame,openCard,closeCard,correctMatch,falseMatch,setMatch} = cardsSlice.actions;
 export default cardsSlice.reducer;

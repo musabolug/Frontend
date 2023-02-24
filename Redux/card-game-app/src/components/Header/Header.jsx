@@ -25,7 +25,8 @@ function Header() {
             dispatch(resetGame());
             setBtn("start")
          }
-        }
+        
+    }
     }
     useEffect(()=>{
         closedCards === 0 && setBtn("start");
