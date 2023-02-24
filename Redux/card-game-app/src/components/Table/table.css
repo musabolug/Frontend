@@ -1,13 +1,14 @@
-.table{
+  .table{
+
+
     color: #2761c3 ;
 
 }
 .container{
-  margin-top: 20px;
+  margin-top: 1px;
 }
 .col{
   margin: 5px;
-  
 }
 #btnControl{
   display: none;
@@ -16,7 +17,10 @@
   background: none;
   border: none;
   }
-
+.name{
+  font-weight: 700;
+  font-size: 20px;
+}
 .crown{
     width: 150px;
     height: 150px;
@@ -26,7 +30,12 @@
     display: block;
     margin-bottom: 10px;
 }
-
+.sultanImg{
+  width: 150px;
+  height: 150px;
+  justify-content: center;
+  object-fit: cover;
+}
 .flip-card {
     background-color: transparent;
     width: 190px;
@@ -51,8 +60,9 @@
     transform-style: preserve-3d;
   }
   
-  .flip-card-inner {
+   .card:hover .flip-card-inner {
     transform: rotateY(180deg);
+    
   }
   
   .flip-card-front, .flip-card-back {
@@ -81,4 +91,6 @@
        bisque 40%, rgb(255, 185, 160) 78%);
     color: white;
     transform: rotateY(180deg);
-  }
+  } 
+
+  

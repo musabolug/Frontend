@@ -21,7 +21,7 @@ const cardsSlice = createSlice({
         
     },
     reducers:{
-        fillCards: (state,action)=>{
+        fillCards: (state)=>{
             state.cards = setCards();
         },
         resetGame: (state,action) =>{
@@ -42,7 +42,7 @@ const cardsSlice = createSlice({
         },
         closeCard: (state) =>{
             state.activeCards.map(
-                (item) => (state.cards.find((card) => card.id === item.id).status = false))
+                (item) => (state.cards.find((sultan) => sultan.id === item.id).status = false))
                 state.status = "";
                 state.activeCards = [];
         },

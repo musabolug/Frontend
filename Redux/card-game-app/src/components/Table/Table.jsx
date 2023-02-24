@@ -14,9 +14,12 @@ function Table() {
         <Row>
         
         {
-            cards.map((sultan) =><Col className='col'><Card sultan={sultan} /></Col>)
+            // cards.map((sultan) =><Col className='col'><Card sultan={sultan} /></Col>)
 
         }
+           {React.Children.toArray(
+          cards.map((sultan) => <Col className='col'><Card sultan={sultan} /></Col>)
+        )}
       
       </Row>
    </Container>

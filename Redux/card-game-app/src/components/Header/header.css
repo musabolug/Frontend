@@ -26,7 +26,7 @@ button {
     color: #2761c3 ;
   }
   button:hover{
-    color: #27c39f
+    color: coral
   }
   #clip {
     --color: #2761c3;
@@ -60,14 +60,14 @@ button {
   }
   
   button:hover #rightArrow {
-    background-color: #27c39f;
+    background-color: coral;
     left: -15%;
     animation: 0.6s ease-in-out both infinite alternate rightArrow8;
    
   }
   
   button:hover #leftArrow {
-    background-color: #27c39f;
+    background-color:coral;
     left: 103%;
     animation: 0.6s ease-in-out both infinite alternate leftArrow8;
   }
@@ -128,7 +128,7 @@ button {
   
   button:hover #clip {
     animation: 0.2s ease-in-out 0.55s both greenLight8;
-    --color: #27c39f;
+    --color: coral
   }
   
   @keyframes changeColor8 {
@@ -137,17 +137,17 @@ button {
     }
   
     to {
-      background-color: #27c39f;
+      background-color: coral;
     }
   }
   
   @keyframes lightEffect8 {
     from {
-      box-shadow: 1px 1px 5px #27c39f;
+      box-shadow: 1px 1px 5px coral
     }
   
     to {
-      box-shadow: 0 0 2px #27c39f;
+      box-shadow: 0 0 2px coral;
     }
   }
   
@@ -156,7 +156,7 @@ button {
     }
   
     to {
-      box-shadow: inset 0px 0px 32px #27c39f;
+      box-shadow: inset 0px 0px 32px coral;
     }
   }
   
