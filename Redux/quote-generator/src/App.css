@@ -1,0 +1,8 @@
+.App{
+    text-align: center;
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(to bottom right,#B7E21E,#86B300,#568600,#2B5C00,#1B3300);
+    /* background-image: linear-gradient(to bottom right,#B7E21E,#74D02F,#01BB41,#00A550,#008E5C,#007665); */
+     font-family: inherit
+}

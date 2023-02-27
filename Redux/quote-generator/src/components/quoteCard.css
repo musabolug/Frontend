@@ -1,0 +1,93 @@
+.main{
+    text-align: center;
+    display: inline-flex;
+    margin-top: 20px;
+}
+.card {
+    max-width: 700px;
+    min-width: 600px;
+    height: 600px;
+    background: rgb(183, 226, 25);
+    font-family: inherit;
+    text-align: left;
+    border-radius: 10%;
+   }
+   
+   .quote {
+    color: rgb(223, 248, 134);
+    padding-left: 40px;
+    padding-top: 5rem;
+    text-align: left;
+    position: relative;
+    
+   }
+   .quote svg{
+    height: 250px;
+    width: auto;
+   }
+   
+   
+   .card-name {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 30px;
+    color: rgb(158, 196, 21);
+    padding: 35px;
+    width: 600px;
+    text-align: center;
+    justify-content: center;
+    left: 100px
+       }
+   
+   .body-text {
+    font-size: 45px;
+    font-weight: 900;
+    padding: 60px 40px 0;
+    color: #465512;
+    position: absolute;
+    top: 10rem;
+    left: 11rem;
+    right:60px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left:auto;
+    margin-right:auto;
+    display:inline-flex;
+    width: 400px;
+    justify-content: start;
+    text-align: left;
+   }
+   
+   .author {
+    margin-top: 4rem;
+    opacity: 0;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    font-size: 35px;
+    text-align: center;
+   }
+   
+   .card:hover .author {
+    opacity: 1;
+   }
+   
+   .pic {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(158, 196, 21);
+    border-radius: 50%;
+   }
+   
+   .author-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+   }
+   
+   .author {
+    font-weight: 700;
+    color: rgb(158, 196, 21);    
+   }
