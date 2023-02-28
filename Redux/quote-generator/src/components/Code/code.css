@@ -1,0 +1,226 @@
+.Heading {
+    color: ghostwhite;
+    font-size: 70px;
+    margin-bottom: 2rem;
+}
+.Card {
+    width: 1024px;
+    height: 600px;
+    margin: 0 auto;
+    background-color: #011522;
+    border-radius: 8px;
+    z-index: 1;
+   }
+   
+   .Tools {
+    display: flex;
+    align-items: center;
+    padding: 9px;
+   }
+   
+   .Circle {
+    padding: 0 4px;
+   }
+   
+   .Box {
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    padding: 1px;
+    border-radius: 50%;
+   }
+   
+   .Red {
+    background-color: #ff605c;
+   }
+   
+   .Yellow {
+    background-color: #ffbd44;
+   }
+   
+   .Green {
+    background-color: #00ca4e;
+   }
+   .Card__content{
+    color: white;
+    font-size: 2rem;
+    padding: 100px;
+   }
+
+   .form__group {
+    margin-right: 20px;
+    position: relative;
+    padding: 20px 0 0;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 180px;
+  }
+  
+  .form__field {
+    font-family: inherit;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid black;
+    outline: 0;
+    font-size: 17px;
+    color: #fff;
+    padding: 7px 0;
+    background: transparent;
+    -webkit-transition: border-color 0.2s;
+    transition: border-color 0.2s;
+  }
+  
+  .form__field::-webkit-input-placeholder {
+    color: transparent;
+  }
+  
+  .form__field::-moz-placeholder {
+    color: transparent;
+  }
+  
+  .form__field:-ms-input-placeholder {
+    color: transparent;
+  }
+  
+  .form__field::-ms-input-placeholder {
+    color: transparent;
+  }
+  
+  .form__field::placeholder {
+    color: transparent;
+  }
+  
+  .form__field:-moz-placeholder-shown ~ .form__label {
+    font-size: 25px;
+    cursor: text;
+    top: 20px;
+  }
+  
+  .form__field:-ms-input-placeholder ~ .form__label {
+    font-size: 25px;
+    cursor: text;
+    top: 20px;
+  }
+  
+  .form__field:placeholder-shown ~ .form__label {
+    font-size: 25px;
+    cursor: text;
+    top: 20px;
+  }
+  
+  .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    font-size: 25px;
+    color: black;
+    pointer-events: none;
+  }
+  
+  .form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    -o-border-image: linear-gradient(to right, #006300, #44EE44);
+       border-image: -webkit-gradient(linear, left top, right top, from(#006300), to(#44EE44));
+       border-image: linear-gradient(to right, #006300, #44EE44);
+    border-image-slice: 1;
+  }
+  
+  .form__field:focus ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    font-size: 25px;
+    color: #44EE44;
+    font-weight: 700;
+  }
+  
+  /* reset input */
+  .form__field:required, .form__field:invalid {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+
+  .inputs{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin: 20px;
+    
+  }
+  /* html text*/
+.text{
+    font-size: 25px;
+    margin-top: 30px;
+}
+.active{
+  font-size: 25px;
+    margin-top: 30px;
+    color:#44EE44 ;
+}
+  /* The switch - the box around the slider */
+.switch {
+    margin-left: 10px;
+    margin-top: 30px;
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.5em;
+    height: 2em;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch .input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2e2e2e;
+    transition: .4s;
+    border-radius: 30px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 1.4em;
+    width: 1.4em;
+    border-radius: 20px;
+    left: 0.3em;
+    bottom: 0.3em;
+    background-color: #4e4;
+    transition: .4s;
+  }
+  
+  .switch_input:checked + .slider {
+    background-color: #000;
+  }
+  
+  .switch_input:focus + .slider {
+    box-shadow: 0 0 1px #000;
+  }
+  
+  .switch_input:checked + .slider:before {
+    transform: translateX(1.5em);
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
