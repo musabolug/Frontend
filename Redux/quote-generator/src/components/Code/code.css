@@ -1,11 +1,11 @@
 .Heading {
     color: ghostwhite;
     font-size: 70px;
-    margin-bottom: 2rem;
+    margin-bottom: 0rem;
 }
 .Card {
-    width: 1024px;
-    height: 600px;
+    width: 840px;
+    height: 420px;
     margin: 0 auto;
     background-color: #011522;
     border-radius: 8px;
@@ -45,7 +45,7 @@
    .Card__content{
     color: white;
     font-size: 2rem;
-    padding: 100px;
+    padding: 50px 95px;
    }
 
    .form__group {
@@ -151,7 +151,7 @@
     display: flex;
     text-align: center;
     justify-content: center;
-    margin: 20px;
+    margin-bottom: 10px;
     
   }
   /* html text*/

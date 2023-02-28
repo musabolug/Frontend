@@ -29,12 +29,12 @@ Button{
 }
 
 .cssbuttons-io {
-    width: 40rem;
-    height: 10rem;
+    width: 30rem;
+    height: auto;
     position: relative;
     font-family: inherit;
     font-weight: 500;
-    font-size: 3rem;
+    font-size: 2.5rem;
     letter-spacing: 0.05em;
     border-radius: 0.8em;
     border: none;
@@ -86,13 +86,16 @@ Button{
    }
    
    .navlinkButton {
-    width: 40rem;
-    height: 10rem;
+    padding: 20px;
+    letter-spacing: 0.05em;
+    width: 30rem;
+    height: 120px;
     margin: 0px;
-    margin-left: 0rem;
+    margin-left: 4.5rem;
     cursor: pointer;
     font-weight: 700;
     font-family: Helvetica,"sans-serif";
+    font-size: 2.5rem !important;
     transition: all .2s;
     padding: 10px 20px;
     border-radius: 0.8em;
@@ -100,7 +103,6 @@ Button{
     border: 1px solid transparent;
     display: flex;
     align-items: center;
-    font-size: 3rem;
   }
   
   .navlinkButton:hover {
@@ -108,9 +110,9 @@ Button{
   }
   
   .navlinkButton > svg {
-    width: 75px;
+    width: 60px;
     height: auto;
-    margin-left: 25px;
+    margin-left: 10px;
     transition: transform .3s ease-in-out;
   }
   .cssbuttons-io > svg{

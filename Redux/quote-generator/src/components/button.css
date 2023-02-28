@@ -21,9 +21,9 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    font-size: 25px;
-    width: 250px;
-    height: 80px;
+    font-size: 21px;
+    width: 200px;
+    height: 60px;
   }
   
   .Button:hover {
@@ -31,7 +31,7 @@
   }
   
   .Button > svg {
-    width: 60px;
+    width: 30px;
     height: auto;
     margin-left: 15px;
     -webkit-transition: -webkit-transform .3s ease-in-out;

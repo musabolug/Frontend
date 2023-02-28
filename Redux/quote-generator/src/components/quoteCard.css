@@ -4,9 +4,9 @@
     margin-top: 20px;
 }
 .card {
-    max-width: 700px;
-    min-width: 600px;
-    height: 600px;
+    max-width: 600px;
+    min-width: 400px;
+    height: 400px;
     background: rgb(183, 226, 25);
     font-family: inherit;
     text-align: left;
@@ -16,13 +16,13 @@
    .quote {
     color: rgb(223, 248, 134);
     padding-left: 40px;
-    padding-top: 5rem;
+    padding-top: 2rem;
     text-align: left;
     position: relative;
     
    }
    .quote svg{
-    height: 250px;
+    height: 200px;
     width: auto;
    }
    
@@ -30,17 +30,17 @@
    .card-name {
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 30px;
+    font-size: 25px;
     color: rgb(158, 196, 21);
-    padding: 35px;
+    padding: 35px 15px; 
     width: 600px;
     text-align: center;
     justify-content: center;
-    left: 100px
+    left: 50px
        }
    
    .body-text {
-    font-size: 45px;
+    font-size: 35px;
     font-weight: 900;
     padding: 60px 40px 0;
     color: #465512;
@@ -59,11 +59,11 @@
    }
    
    .author {
-    margin-top: 4rem;
+    margin-top: 0.75rem;
     opacity: 0;
     -webkit-transition: 0.5s;
     transition: 0.5s;
-    font-size: 35px;
+    font-size: 25px;
     text-align: center;
    }
    
