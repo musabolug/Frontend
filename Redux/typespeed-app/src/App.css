@@ -2,5 +2,18 @@
   text-align: center;
 }
 body{
-  background-image: url();
+  background-image: url(https://cdnb.artstation.com/p/assets/images/images/028/619/953/large/anton-dmitriev-sleep-tube4.jpg?1594990334);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-size: 100% 100%;
+}
+@media (max-width: 400px) {
+    body{
+      background-image: url(https://cdnb.artstation.com/p/assets/images/images/028/619/953/large/anton-dmitriev-sleep-tube4.jpg?1594990334);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-size: 100% 100%;
+    }
 }
