@@ -1,0 +1,125 @@
+body{
+    background-color: #ff9f1a;
+}
+.App{
+    text-align: center;
+   
+}
+.markdownArea{
+background-color: #4B8078;
+width: auto;
+width: 100%;
+height: 600px ;
+margin: 30px 80px ;
+border-radius: 20px;
+color: #C3FCF1;
+padding: 20px;
+font-size: 20px
+}
+.previewArea{
+ background-color: #4B8078;
+ width: auto;
+ width: 100%;
+ height: 600px ;
+ margin: 30px 80px ;
+ border-radius: 20px;
+ color: #C3FCF1;
+ padding: 20px;
+ font-size: 20px
+
+}
+.textareas{
+    text-align: left;
+    justify-content: space-around;
+    display: flex;
+}
+.heading{
+    font-size: 4rem;
+    padding-top: 30px;
+    color: #005248;
+    display: inline-block;
+
+}
+.Help{
+    align-items: right !important;
+    text-align: right;
+    display: inline-block;
+}
+
+.helpIcon{
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    margin: 20px;
+    padding-bottom: 20px;
+    padding: 5px;
+    font-size: 35px;
+    background-color: #4B8078;    
+    color: #C3FCF1;
+}
+.helpIcon:hover{
+    background-color: #3c655f;    
+}
+@media (min-aspect-ratio: 16/9){
+    .App{
+        width:100% ;
+        height: auto;
+    }
+}
+@media (max-aspect-ratio: 16/9){
+    .App{
+        width:auto ;
+        height: 100%;
+    }
+}
+@media (max-width: 800px ){
+    .heading{
+        font-size: 35px;
+        padding-top: 20px;
+        margin: 0px;
+    }
+    .textareas{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin-top: 0px;
+        
+    }
+    .markdownArea{
+        background-color: #4B8078;
+        color: #C3FCF1;
+        margin: 20px 30px;
+        height: 280px;
+        width: 70%;
+
+
+        }
+    .previewArea{
+        background-color: #4B8078;
+         color: #C3FCF1;
+         margin: 20px;
+         height: 280px;
+        width: 70%;
+        }
+}
+
+@media (max-width: 1000px ){
+    .markdownArea{
+        background-color: #4B8078;
+        color: #C3FCF1;
+        margin: 20px 30px;
+        height: 400px;
+        width: 70%;
+
+
+        }
+    .previewArea{
+        background-color: #4B8078;
+         color: #C3FCF1;
+         margin: 20px;
+         height: 400px;
+         width: 70%;
+        }
+}
