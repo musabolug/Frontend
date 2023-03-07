@@ -7,3 +7,21 @@
     /* color:#EF4395 */
     color:#00C6DA
 }
+
+/* ! Phone size */
+
+@media (max-width: 450px) {
+    
+    .header{
+        text-align: center;
+        display: flex;
+        justify-content: center ;
+    }
+    .heading{
+        font-family: 'Roboto Mono', monospace;
+        font-size: 45px;
+       
+        /* color:#EF4395 */
+        color:#00C6DA
+    }
+}

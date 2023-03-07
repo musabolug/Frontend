@@ -1,6 +1,10 @@
 .App {
   text-align: center;
   margin-top:40px;
+  justify-content:center !important;
+  align-items:center;
+  width: auto;
+  height: 100vh;
 }
 body{
   background-image: url(https://cdnb.artstation.com/p/assets/images/images/028/619/953/large/anton-dmitriev-sleep-tube4.jpg?1594990334);
@@ -12,7 +16,16 @@ body{
 
 /* ! Phone size */
 @media (max-width: 600px) {
+    .App{
+      justify-content:center !important;
+      align-items:center;
+      margin-left: 100px;
+      /* margin-right: 100px; */
+      width: 400px;
+    }
     body{
+      justify-content:center ;
+      align-items:center;
       background-image: url(https://github.com/musabolug/Frontend/blob/master/Redux/typespeed-app/src/assets/bg3.jpg?raw=true);
       background-repeat: no-repeat;
       background-attachment: fixed;

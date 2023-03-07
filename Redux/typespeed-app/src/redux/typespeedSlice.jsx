@@ -24,6 +24,16 @@ export const typespeedSlice = createSlice({
         accuracy:0,
     },
     reducers:{
+        setAccuracy:(state,action) =>{
+            state.accuracy = action.payload
+        },
+        resetWords:(state)=>{
+            state.words= arrayShuffle(wordData.words).map((item) => {
+                return {...item, status: ""}
+            })
+            state.wordIndex = 0;
+            state.tickstatus = false
+        },
         setModalstate:(state) =>{
             state.modalOpen = true
         },
@@ -38,7 +48,7 @@ export const typespeedSlice = createSlice({
             state.selectedLanguage = action.payload
         },
         setCurrentWord:(state, action) =>{
-            action.currentWord =action.payload;
+            state.currentWord =action.payload;
         },
         setInput: (state,action)=>{
             const inputTextlastCharacter = 
@@ -53,10 +63,8 @@ export const typespeedSlice = createSlice({
             if(
                 state.currentWord.split("")[state.inputText.length -1] === inputTextlastCharacter
             ){
-                state.correctWordsTick++;
                 state.tickstatus = false;
             }else{
-                state.wrongWordsTick++;
                 state.tickstatus = true;
             }
         }else{
@@ -64,14 +72,34 @@ export const typespeedSlice = createSlice({
         }
         },
         setKeyTick: (state,action)=>{
-            const currentText = action.payload.trim();
-            const currentArray = currentText.split("");
-            const inputArray = state.inputText.split("");
-            inputArray.map((ch,idx)=>{
-                ch === currentArray[idx]
-                ? state.correctWordsTick++
-                : state.wrongWordsTick++
-            })
+            const currentWord = state.words[state.wordIndex];
+            const char = action.payload.trim()
+            const CharArray = char.split("")
+            const CharArrayTR = currentWord.turkish.split("")
+            const CharArrayEN = currentWord.english.split("")
+            if(state.selectedLanguage === "EN"){
+                CharArray.map((ch,index)=>{
+                        if(ch === CharArrayEN[index]){
+                          state.correctWordsTick++
+                          state.tickstatus = false
+                           
+                        }else{
+                            state.wrongWordsTick++
+                            state.tickstatus = true
+                        }
+                })
+
+            }else if(state.selectedLanguage === "TR"){
+                CharArray.map((ch,index)=>{
+                    if(ch === CharArrayTR[index]){
+                        state.correctWordsTick++
+                        state.tickstatus = false
+                    }else{
+                        state.wrongWordsTick++
+                        state.tickstatus = true
+                      }
+                })
+            }
         },
         setKeyPress:(state) =>{
             const currentWord = state.words[state.wordIndex];
@@ -104,12 +132,14 @@ export const typespeedSlice = createSlice({
             state.start=false;
             state.modalOpen=false;
             state.timerKey=60;        
+            state.accuracy=0
+            resetWords()
         },
         setModalStatus: (state,action)=>{
             state.modalOpen = action.payload
-        }
+        },
     }
 })
 
-export const {setModalStatus,resetGame,setKeyPress,setKeyTick,setInput,setCurrentWord,changeLanguage,stopGame,startGame,setModalstate} = typespeedSlice.actions;
+export const {setModalStatus,resetGame,setAccuracy,setKeyPress,setKeyTick,setInput,setCurrentWord,changeLanguage,stopGame,startGame,setModalstate,resetWords} = typespeedSlice.actions;
 export default typespeedSlice.reducer 

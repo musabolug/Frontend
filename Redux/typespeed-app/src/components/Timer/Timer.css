@@ -20,11 +20,11 @@
 
 /**  card * */
 .card {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 1px;
     /* background-image: linear-gradient(163deg, #00ff75 0%, #3700ff 100%); */
     background-image: linear-gradient(163deg,  #BB358A 0%,#3F84D5  100%);
-    border-radius: 20px;
+    border-radius: 20px !important;
     transition: all .3s;
     align-items: center;
     padding: 2px;
@@ -69,3 +69,16 @@
     margin-top:25px;
     justify-content: center;
 }
+
+    /* ! Phone size */
+    @media (max-width: 600px) {
+ 
+        .app{
+            align-items: center;
+            justify-content: center;
+            display: inline-flex;
+            margin-top: 25px;
+            width: 400px;
+            
+        }
+    }
