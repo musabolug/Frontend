@@ -1,0 +1,9 @@
+.header{
+    text-align: center;
+}
+.heading{
+    font-family: 'Roboto Mono', monospace;
+    font-size: 50px;
+    /* color:#EF4395 */
+    color:#00C6DA
+}

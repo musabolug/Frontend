@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin-top:40px;
 }
 body{
   background-image: url(https://cdnb.artstation.com/p/assets/images/images/028/619/953/large/anton-dmitriev-sleep-tube4.jpg?1594990334);
@@ -8,9 +9,11 @@ body{
   background-size: cover;
   background-size: 100% 100%;
 }
-@media (max-width: 400px) {
+
+/* ! Phone size */
+@media (max-width: 600px) {
     body{
-      background-image: url(https://cdnb.artstation.com/p/assets/images/images/028/619/953/large/anton-dmitriev-sleep-tube4.jpg?1594990334);
+      background-image: url(https://github.com/musabolug/Frontend/blob/master/Redux/typespeed-app/src/assets/bg3.jpg?raw=true);
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-size: cover;

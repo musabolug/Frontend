@@ -1,0 +1,46 @@
+.inputArea{
+    margin-top: 30px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.input {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 559px;
+    height: 69px;
+    border-radius: 10px;
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+    font-family: 'Merriweather', serif;
+    color: #00C6DA;
+    font-size: 35px;
+    background-color: #1a1a1a;
+    border: none;
+  }
+  .input:focus{
+    border: none;
+    outline: none;
+  }
+  
+  
+    .background{
+        background-color: #1a1a1a;
+        width: 600px;
+        height: 70px;
+        border-radius: 10px;
+        /* outline: 4px solid #BB358A ; */
+        justify-content: center;
+        outline-offset: 3px;
+    }
+    .background-outline{
+        justify-content: center;
+        width: 602px;
+        height: 70px;
+        background-image: linear-gradient(163deg,  #BB358A 0%,#3F84D5  100%);
+        border-radius: 20px;
+        align-items: center;
+        padding: 7px;
+        align-self: center;
+    }
+
+    
