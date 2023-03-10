@@ -68,9 +68,16 @@ const gameSlice = createSlice({
             state.user1.stones = setWhiteStones()
             state.user2.stones = setBlackStones()
             state.board = configureStonesOnBoard()
-        }
+        },
+        moveStone:(state,action)=>{
+            state.selectedStone = action.payload
+            console.log(state.selectedStone.id)
+            console.log("user1", state.user1.stones)
+            console.log("user2",state.user2.stones)
+
+        },
     },
 })
 
-export const {startGame,closeResult,openResult} = gameSlice.actions
+export const {startGame,closeResult,openResult,moveStone} = gameSlice.actions
 export default gameSlice.reducer

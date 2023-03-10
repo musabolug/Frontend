@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Tile from "../Tile/Tile"
-function Row({rowInfo}) {
 
-  const handleGrab = (e =React.MouseEvent)=>{
-    
-  }
+
+function Row({rowInfo}) {
+  const [isActive,setIsActive] = useState(false)
+  const [direction,setDirection] = useState(undefined)
+  
+
+ 
+
   return (
-    <div onMouseDown={e => handleGrab(e)}>
+    <div>
     {
         rowInfo.map((cellData,index)=>(
-            <Tile key={index} cellData={cellData}/>
+            <Tile  key={index} cellData={cellData}/>
         ))
     }
     </div>

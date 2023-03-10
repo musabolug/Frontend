@@ -29,7 +29,7 @@ export const setBlackStones = ()=>{
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-pawn",
-                isActive: true,
+                isActive: false,
                 isChekers: false,
                 src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-pawn.png?raw=true"
             });
@@ -44,7 +44,7 @@ export const setBlackStones = ()=>{
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-rook",
-                isActive: true,
+                isActive: false,
                 isChekers: false,
                 src: "https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-rook.png?raw=true"
             });
@@ -55,7 +55,7 @@ export const setBlackStones = ()=>{
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-knight",
-                isActive: true,
+                isActive: false,
                 isChekers: false,
                 src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-knight,.png?raw=true"
             });
@@ -66,7 +66,7 @@ export const setBlackStones = ()=>{
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-bishop",
-                isActive: true,
+                isActive: false,
                 isChekers: false,
                 src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-bishop.png?raw=true"
             });
@@ -77,7 +77,7 @@ export const setBlackStones = ()=>{
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-queen",
-                isActive: true,
+                isActive: false,
                 isChekers: false,
                 src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-queen.png?raw=true"
             });
@@ -88,7 +88,7 @@ export const setBlackStones = ()=>{
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-king",
-                isActive: true,
+                isActive: false,
                 isChekers: false,
                 src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-king.png?raw=true"
             });
@@ -110,7 +110,7 @@ export const setWhiteStones = ()=>{
                 positionX:xAxis[i],
                 positionY:j,
                 name:"white-pawn",
-                isActive: true,
+                isActive: false,
                 isChekers: false,
                 src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-pawn.png?raw=true"
             });
@@ -125,7 +125,7 @@ export const setWhiteStones = ()=>{
                     positionX:xAxis[i],
                     positionY:j,
                     name:"white-rook",
-                    isActive: true,
+                    isActive: false,
                     isChekers: false,
                     src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-rook.png?raw=true"
                     
@@ -137,7 +137,7 @@ export const setWhiteStones = ()=>{
                     positionX:xAxis[i],
                     positionY:j,
                     name:"white-knight",
-                    isActive: true,
+                    isActive: false,
                     isChekers: false,
                     src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-knight.png?raw=true"
                 });
@@ -148,7 +148,7 @@ export const setWhiteStones = ()=>{
                     positionX:xAxis[i],
                     positionY:j,
                     name:"white-bishop",
-                    isActive: true,
+                    isActive: false,
                     isChekers: false,
                     src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-bishop.png?raw=true"
                 });
@@ -159,7 +159,7 @@ export const setWhiteStones = ()=>{
                     positionX:xAxis[i],
                     positionY:j,
                     name:"white-queen",
-                    isActive: true,
+                    isActive: false,
                     isChekers: false,
                     src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-queen.png?raw=true"
                 });
@@ -170,7 +170,7 @@ export const setWhiteStones = ()=>{
                     positionX:xAxis[i],
                     positionY:j,
                     name:"white-king",
-                    isActive: true,
+                    isActive: false,
                     isChekers: false,
                     src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-king.png?raw=true"
                 });
