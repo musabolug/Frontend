@@ -6,7 +6,7 @@ export const configureBoard = () =>{
     for(let i = 0; i<=7;i++){
         for(let j =8 ; j>=1; j--){
             gameBoard.push({
-                id:nanoid(),
+                id:`${xAxis[i]}${j}`,
                 positionX:xAxis[i],
                 positionY:j,
                 color: (i+j) % 2 === 0 ? "white": "black",
@@ -25,7 +25,7 @@ export const setBlackStones = ()=>{
     for(let i = 0; i<=7;i++){
         for(let j =7 ; j>=7; j--){
             blackStones.push({
-                id:nanoid(),
+                id:`${xAxis[i]}${j}`,
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-pawn",
@@ -40,7 +40,7 @@ export const setBlackStones = ()=>{
             /* Rook*/ 
             if(i === 0 || i === 7)
             blackStones.push({
-                id:nanoid(),
+                id:`${xAxis[i]}${j}`,
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-rook",
@@ -51,7 +51,7 @@ export const setBlackStones = ()=>{
             /* Knight*/ 
             if(i === 1 || i === 6)
             blackStones.push({
-                id:nanoid(),
+                id:`${xAxis[i]}${j}`,
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-knight",
@@ -62,7 +62,7 @@ export const setBlackStones = ()=>{
             /* Bishop*/ 
             if(i === 2 || i === 5)
             blackStones.push({
-                id:nanoid(),
+                id:`${xAxis[i]}${j}`,
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-bishop",
@@ -73,7 +73,7 @@ export const setBlackStones = ()=>{
             /* Queen*/ 
             if(i === 3)
             blackStones.push({
-                id:nanoid(),
+                id:`${xAxis[i]}${j}`,
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-queen",
@@ -84,7 +84,7 @@ export const setBlackStones = ()=>{
             /* King*/ 
             if(i === 4)
             blackStones.push({
-                id:nanoid(),
+                id:`${xAxis[i]}${j}`,
                 positionX:xAxis[i],
                 positionY:j,
                 name:"black-king",
@@ -106,7 +106,7 @@ export const setWhiteStones = ()=>{
     for(let i = 0; i<=7;i++){
         for(let j =2 ; j>=2; j--){
             whiteStones.push({
-                id:nanoid(),
+                id:`${xAxis[i]}${j}`,
                 positionX:xAxis[i],
                 positionY:j,
                 name:"white-pawn",
@@ -121,7 +121,7 @@ export const setWhiteStones = ()=>{
                 /* Rook*/ 
                 if(i === 0 || i === 7)
                 whiteStones.push({
-                    id:nanoid(),
+                    id:`${xAxis[i]}${j}`,
                     positionX:xAxis[i],
                     positionY:j,
                     name:"white-rook",
@@ -133,7 +133,7 @@ export const setWhiteStones = ()=>{
                 /* Knight*/ 
                 if(i === 1 || i === 6)
                 whiteStones.push({
-                    id:nanoid(),
+                    id:`${xAxis[i]}${j}`,
                     positionX:xAxis[i],
                     positionY:j,
                     name:"white-knight",
@@ -144,7 +144,7 @@ export const setWhiteStones = ()=>{
                 /* Bishop*/ 
                 if(i === 2 || i === 5)
                 whiteStones.push({
-                    id:nanoid(),
+                    id:`${xAxis[i]}${j}`,
                     positionX:xAxis[i],
                     positionY:j,
                     name:"white-bishop",
@@ -155,7 +155,7 @@ export const setWhiteStones = ()=>{
                 /* Queen*/ 
                 if(i === 3)
                 whiteStones.push({
-                    id:nanoid(),
+                    id:`${xAxis[i]}${j}`,
                     positionX:xAxis[i],
                     positionY:j,
                     name:"white-queen",
@@ -166,7 +166,7 @@ export const setWhiteStones = ()=>{
                 /* King*/ 
                 if(i === 4)
                 whiteStones.push({
-                    id:nanoid(),
+                    id:`${xAxis[i]}${j}`,
                     positionX:xAxis[i],
                     positionY:j,
                     name:"white-king",
@@ -181,3 +181,6 @@ export const setWhiteStones = ()=>{
     
     return whiteStones
 }
+    export const moveStone=()=>{
+
+    }

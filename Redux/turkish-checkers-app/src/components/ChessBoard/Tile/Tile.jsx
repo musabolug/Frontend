@@ -1,20 +1,31 @@
-import React from 'react'
+import {useState,useEffect} from 'react'
 import "./Tile.css"
 import { moveStone } from '../../../redux/gameSlice'
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 function Tile({cellData}) {
+  const {selectedStone ,movableAreas} = useSelector((state) => state.game)
  const bgColor = cellData.color 
-
-
+ const [hint,setHint] = useState("")
+  
  const dispatch = useDispatch()
 
   const handleClick = (e)=>{
     if(e.target.classList.contains("chessPiece")){
-      dispatch(moveStone(e.target))
+      dispatch(moveStone(e.target.id))
+      console.log(e.target)
+    }else{
+      console.log(e.target)
     }
   }
   return(
-    <div onClick={(e)=> handleClick(e)} className={`tile ${bgColor}`}>
+    <div id={cellData.id} onClick={(e)=> handleClick(e)} className={` tile   ${ selectedStone === cellData.id?"active":bgColor} `}>
+      {
+        movableAreas  &&
+       movableAreas.map(
+          (id) => id === cellData.id ?( <div className='hint'></div>): ""
+          )
+       }
+      
         {
             cellData.positionX === "a" && <span className='positionY'>{cellData.positionY}</span>
         }

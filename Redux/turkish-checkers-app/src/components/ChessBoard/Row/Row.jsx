@@ -3,11 +3,8 @@ import Tile from "../Tile/Tile"
 
 
 function Row({rowInfo}) {
-  const [isActive,setIsActive] = useState(false)
-  const [direction,setDirection] = useState(undefined)
-  
+  // const [isActive, setIsActive] = useState= ("false")
 
- 
 
   return (
     <div>

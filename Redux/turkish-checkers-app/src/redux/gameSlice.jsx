@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice ,current} from "@reduxjs/toolkit";
 import { configureBoard ,setWhiteStones,setBlackStones } from "../checkers";
 const configureStonesOnBoard  = ()=>{
     const board = configureBoard().flat();
     const totalUsersStones = [
         ...setWhiteStones().flat(),
         ...setBlackStones().flat(),
-    ]  
+    ]
     // positionX:xAxis[i],
     // positionY:j,
     const xAxis = ["a","b","c","d","e","f","g","h"]
@@ -28,7 +28,7 @@ const configureStonesOnBoard  = ()=>{
 const gameSlice = createSlice({
     name:"game",
     initialState:{
-        board: configureStonesOnBoard(),
+        board: configureBoard(),
         user1:{
             id:1,
             name: "",
@@ -51,7 +51,10 @@ const gameSlice = createSlice({
         whiteStones:"",
         blackStones:"",
         movable: false,
-        theme:"light"
+        theme:"light",
+        showUserForm: false,
+        isActive: false,
+        movableAreas: []
     },
     reducers:{
         openResult: (state) =>{
@@ -66,18 +69,83 @@ const gameSlice = createSlice({
             state.user1.name= user2;
             state.gameStatus= "playing";
             state.user1.stones = setWhiteStones()
+            state.user2.stones =setBlackStones()
+            state.board = configureStonesOnBoard()
+            console.log("user1",state.user1.stones)
+            console.log("user2",state.user2.stones)
+        },
+        resetGame:(state)=>{
+            state.gameStatus= "";
+            state.user1.stones = setWhiteStones()
             state.user2.stones = setBlackStones()
             state.board = configureStonesOnBoard()
+            state.user1={
+            id:1,
+            name: "",
+            totalStones: 16,
+            color: "white",
+            stones:[]
+        }
+        state.user2={
+            id:2,
+            name: "",
+            totalStones: 16,
+            color: "black",
+            stones:[]
+        }
+        state.gameStatus=""
+        state.showModal= false
+        state.player="white"
+        state. selectedStone= ""
+        state.rivalStones=""
+        state.whiteStones=""
+        state. blackStones=""
+        state.movable= false
+        state.theme="light"
+        state.showUserForm= false
         },
         moveStone:(state,action)=>{
             state.selectedStone = action.payload
-            console.log(state.selectedStone.id)
-            console.log("user1", state.user1.stones)
-            console.log("user2",state.user2.stones)
-
+            console.log(state.selectedStone)
+            console.log("user1",current(state.user1.stones))
+            console.log("user2  ",current(state.user2.stones))
+            if(state.player ==="white"){
+             const Whitestones=current(state.user1.stones)
+             let selectedObj = Whitestones.find((obj)=> obj.id === state.selectedStone)
+             if(selectedObj){
+                 selectedObj = {...selectedObj, isActive : true}
+                 console.log(selectedObj.isActive)
+                 state.isActive = selectedObj.isActive
+                 const x = selectedObj.positionX
+                 const y = selectedObj.positionY
+                 if(selectedObj.name ==="white-pawn"){
+                    if(selectedObj.positionY === 2){
+                        state.movableAreas = [`${x}3`,`${x}4`]
+                        console.log(state.movableAreas)
+                    }else{
+                        state.movableAreas = [`${x}${y+1}`,]
+                    }
+                 }
+             }
+            
+            }
+            if(state.player === "black"){
+                const Blackstones=current(state.user2.stones)
+                let selectedObj = Blackstones.find((obj)=> obj.id === state.selectedStone)
+                if(selectedObj){
+                    selectedObj = {...selectedObj, isActive : true}
+                    console.log(selectedObj.isActive)
+                    state.isActive = selectedObj.isActive
+                    
+                }
+            }
         },
+        setShowUserForm:(state,action)=>{
+            state.showUserForm = action.payload
+        }
+
     },
 })
 
-export const {startGame,closeResult,openResult,moveStone} = gameSlice.actions
+export const {startGame,closeResult,openResult,moveStone,setShowUserForm,resetGame} = gameSlice.actions
 export default gameSlice.reducer

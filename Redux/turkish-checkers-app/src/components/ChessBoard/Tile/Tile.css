@@ -57,3 +57,14 @@ background-color: #eeeed2;
 .tile .chessPiece:active{
     cursor:grabbing
 }
+.active{
+    background-color: #baca2b !important
+}
+
+.hint{
+    width: 25px;
+    height: 25px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+   
+}

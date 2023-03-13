@@ -6,7 +6,7 @@ function Footer() {
     <div className='footer'>
         <p style={{color: "white", fontSize: "25px"}}>Developed by
         <a href="https://github.com/musabolug">
-        <button>
+        <button className='button'>
              Musab Olug
         </button>
         </a>
