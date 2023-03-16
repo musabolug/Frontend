@@ -62,9 +62,23 @@ background-color: #eeeed2;
 }
 
 .hint{
-    width: 25px;
+    /* width: 25px;
     height: 25px;
     background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-   
+    border-radius: 50%; */
+    height: 65px;
+    width: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+}
+.hint img{
+    position: absolute;
+    z-index: 2;
+    margin: 0px;
+    opacity: 0.6;
+    width: 45px;
+    height: 45px;
 }

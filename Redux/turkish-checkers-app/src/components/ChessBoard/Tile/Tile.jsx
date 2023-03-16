@@ -1,28 +1,41 @@
 import {useState,useEffect} from 'react'
 import "./Tile.css"
-import { moveStone } from '../../../redux/gameSlice'
+import { ReactDOM } from 'react'
+import { selectStone ,moveStone,setPlayer} from '../../../redux/gameSlice'
 import {useDispatch, useSelector} from "react-redux"
+import Point from "../../../assets/points.png" 
 function Tile({cellData}) {
-  const {selectedStone ,movableAreas} = useSelector((state) => state.game)
+  const {selectedStone ,movableAreas,showHint,player} = useSelector((state) => state.game)
  const bgColor = cellData.color 
- const [hint,setHint] = useState("")
+  
   
  const dispatch = useDispatch()
+ 
+ const handleClick = (e)=>{
+   if(e.target.classList.contains("chessPiece")){
+     dispatch(selectStone(e.target.id))
 
-  const handleClick = (e)=>{
-    if(e.target.classList.contains("chessPiece")){
+    }
+    if(e.target.classList.contains("hint")){
       dispatch(moveStone(e.target.id))
-      console.log(e.target)
-    }else{
-      console.log(e.target)
+      if(player === "white"){
+        dispatch(setPlayer("black"))
+      }else{
+        dispatch(setPlayer("white"))
+      }
     }
   }
+  
   return(
-    <div id={cellData.id} onClick={(e)=> handleClick(e)} className={` tile   ${ selectedStone === cellData.id?"active":bgColor} `}>
+    <div id={cellData.id}  onClick={(e)=> handleClick(e)} className={` tile   ${ selectedStone === cellData.id?"active":bgColor} `}>
       {
-        movableAreas  &&
-       movableAreas.map(
-          (id) => id === cellData.id ?( <div className='hint'></div>): ""
+        movableAreas  && showHint &&
+       movableAreas.flat().map(
+          (id) => id === cellData.id ?( 
+          <div id={cellData.id} className={showHint? "hint":""}>
+            
+              <img className={showHint? "hint":""} id={cellData.id} src={Point} alt="" />
+            </div>): ""
           )
        }
       
@@ -31,7 +44,8 @@ function Tile({cellData}) {
         }
           {/**White PIECES */}
         {
-        cellData.stoneData.name === "white-pawn" &&
+         
+          cellData.stoneData.name === "white-pawn" &&
         <div id={cellData.stoneData.id} style={{backgroundImage: `url(${cellData.stoneData.src})`}} className="chessPiece"></div>
         }
           {
@@ -85,7 +99,6 @@ function Tile({cellData}) {
     }
     </div>
   )
- 
 }
 
 export default Tile

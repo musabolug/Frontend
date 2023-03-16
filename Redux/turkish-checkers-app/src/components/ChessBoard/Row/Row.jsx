@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Tile from "../Tile/Tile"
-
+import { useDispatch } from 'react-redux'
+import { moveStone } from '../../../redux/gameSlice'
 
 function Row({rowInfo}) {
   // const [isActive, setIsActive] = useState= ("false")
-
+ 
 
   return (
     <div>

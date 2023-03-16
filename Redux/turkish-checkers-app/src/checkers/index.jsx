@@ -181,6 +181,4 @@ export const setWhiteStones = ()=>{
     
     return whiteStones
 }
-    export const moveStone=()=>{
-
-    }
+ 
