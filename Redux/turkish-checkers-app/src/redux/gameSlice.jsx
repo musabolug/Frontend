@@ -59,7 +59,8 @@ const gameSlice = createSlice({
         totalStones:[],
         showHint: true,
         eatenStones:[],
-        eatableIndexes:[]
+        eatableIndexes:[],
+        friendStones:[]
     },
     reducers:{
         openResult: (state) =>{
@@ -132,7 +133,7 @@ const gameSlice = createSlice({
                  const y = state.selectedObj.positionY
                  let isBlocked = false
                  const eatableStones = [] 
-                 const xAxis = ["a","b","c","d","e","f","g","h"]
+                
                  if(state.selectedObj.name ==="white-pawn"){
                     //* EATABLE AREAS for white- pawn
                     state.eatableIndexes.length=0
@@ -245,7 +246,6 @@ const gameSlice = createSlice({
                         }
                     }
                     else if(x === "h"){
-                       
                         eatableStones.push(current(state.user2.stones).find((obj)=>obj.id ===`g${y+1}`))
                         console.log("eatableStone",eatableStones)
                         console.log("eatableStones",eatableStones.flat())
@@ -254,21 +254,31 @@ const gameSlice = createSlice({
                             console.log("eatable",current(state.eatableIndexes))
                         }
                     }
-                    //* -------------
            
                     const forwardStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === Number(y+1))
+                    const forwardStone1 =state.board.find((obj)=> obj.positionX === x && obj.positionY === Number(y+2))
                     console.log("forward",current(forwardStone))
-                    if(forwardStone.isEmpty ===false){
+                    if(forwardStone.isEmpty ===false ){
                         isBlocked = true
                     }
                     if(!isBlocked){
                     if(state.selectedObj.positionY === 2){
-                        state.movableAreas = [`${x}3`,`${x}4`]
-                        if(state.eatableIndexes[0] !== undefined){
-                            console.log(current(state.eatableIndexes))
-                            state.movableAreas.push(state.eatableIndexes)
+                        if(forwardStone1.isEmpty === true){
+                            state.movableAreas = [`${x}3`,`${x}4`]
+                            if(state.eatableIndexes[0] !== undefined){
+                                console.log(current(state.eatableIndexes))
+                                state.movableAreas.push(state.eatableIndexes)
+                            }
+                            console.log(state.movableAreas)
+                        }else{
+                            state.movableAreas = [`${x}3`]
+                            if(state.eatableIndexes[0] !== undefined){
+                                console.log(current(state.eatableIndexes))
+                                state.movableAreas.push(state.eatableIndexes)
+                            }
+                            console.log(state.movableAreas)
                         }
-                        console.log(state.movableAreas)
+                        
                     }
                     else{
                         state.movableAreas = [`${x}${y+1}`,]
@@ -288,9 +298,76 @@ const gameSlice = createSlice({
                         }
                     }
                  }
-             }
+                   //* -------------------------------------------
+
+             //! MOVABLE AND EATABLE AREAS FOR WHITE KNIGHT
+             const xAxis = ["a","b","c","d","e","f","g","h"]
+             if(state.selectedObj.name ==="white-knight"){
+                state.movableAreas.length = 0
+            for(let i=0; i<=7; i++ ){ // X AXIS
+                for(let j = 8; j>=1; j--){ // Y AXIS
+                    if(x=== xAxis[i] && y === j){
+                        state.movableAreas = [
+                            `${xAxis[i+1]}${j+2}`,
+                            `${xAxis[i+1]}${j-2}`,
+                            `${xAxis[i-1]}${j+2}`,
+                            `${xAxis[i-1]}${j-2}`,
+                            `${xAxis[i-2]}${j+1}`,
+                            `${xAxis[i-2]}${j-1}`,
+                            `${xAxis[i+2]}${j+1}`,
+                            `${xAxis[i+2]}${j-1}`
+                        ];
+                        
+                    }
+                }
+            }
+            
+         
+            const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+       
+            state.movableAreas = state.movableAreas.filter(obj=> !user1StonesId.includes(obj))
+        }
+        //! ----------------------------------------------
+        //! MOVABLE AND EATABLE AREAS FOR WHITE-ROOK
+        if(state.selectedObj.name=== "white-rook"){
+            const xAxis = ["a","b","c","d","e","f","g","h"]
+            let isEmpty = false
+
+          state.movableAreas.length = 0
+         let counter = 0
+        
+           for(let i=0; i<=7; i++ ){ // X AXIS
+               for(let j = 1; j<=8; j++){ // Y AXIS
+              
+              
+               
+                if(x === xAxis[i]) { //dikey
+                    
+                  let  dikeyTile= [state.board.find((obj) => obj.id ===`${xAxis[i]}${j}`)]
+                    console.log("dikeyTile",dikeyTile)
+                    state.movableAreas.push(`${xAxis[i]}${j}`,)
+                    
+               }
+               if(y === j){// yatay
+                let yatayTile = state.board.find((obj) => obj.id ===`${xAxis[i]}${j}`)
+                isEmpty = yatayTile.isEmpty
+                console.log("yatayTile",current(yatayTile))
+                
+                  state.movableAreas.push(`${xAxis[i]}${j}`,)
+               }
+                  
+             
+               }
+           }
+           
+           console.log(current(state.movableAreas))
+           const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+           
+           state.movableAreas = state.movableAreas.filter(obj=> !user1StonesId.includes(obj))
+        }
             
             }
+        }
             if(state.player === "black"){
                 const Blackstones=current(state.user2.stones)
                state.selectedObj = Blackstones.find((obj)=> obj.id === state.selectedStone)
@@ -433,18 +510,30 @@ const gameSlice = createSlice({
 
                     //*Movable Areas for Black Pawn
                     const forwardStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === Number(y-1))
+                    const forwardStone2 =state.board.find((obj)=> obj.positionX === x && obj.positionY === Number(y-2))
                     console.log("forward",current(forwardStone))
                     if(forwardStone.isEmpty ===false){
                         isBlocked = true
                     }
                     if(!isBlocked){
+                        
                         if(state.selectedObj.positionY === 7){
-                        state.movableAreas = [`${x}6`,`${x}5`]
-                        if(state.eatableIndexes[0] !== undefined || state.eatableIndexes[1] !== undefined){
-                            console.log(current(state.eatableIndexes))
-                            state.movableAreas.push(state.eatableIndexes)
-                        }
-                        console.log(state.movableAreas)
+                            if(forwardStone2.isEmpty === true){
+
+                                state.movableAreas = [`${x}6`,`${x}5`]
+                                if(state.eatableIndexes[0] !== undefined || state.eatableIndexes[1] !== undefined){
+                                    console.log(current(state.eatableIndexes))
+                                    state.movableAreas.push(state.eatableIndexes)
+                                }
+                                console.log(state.movableAreas)
+                            }else{
+                                state.movableAreas = [`${x}6`]
+                                if(state.eatableIndexes[0] !== undefined || state.eatableIndexes[1] !== undefined){
+                                    console.log(current(state.eatableIndexes))
+                                    state.movableAreas.push(state.eatableIndexes)
+                                }
+                                console.log(state.movableAreas)
+                            }
                     }
                     else{
                         state.movableAreas = [`${x}${y-1}`,]
@@ -464,6 +553,32 @@ const gameSlice = createSlice({
                         }
                     }
                     //*-------------
+                       //! MOVABLE AND EATABLE AREAS FOR WHITE KNIGHT
+             const xAxis = ["a","b","c","d","e","f","g","h"]
+             if(state.selectedObj.name ==="black-knight"){
+                state.movableAreas.length = 0
+            for(let i=0; i<=7; i++ ){ // X AXIS
+                for(let j = 8; j>=1; j--){ // Y AXIS
+                    if(x=== xAxis[i] && y === j){
+                        state.movableAreas = [
+                            `${xAxis[i+1]}${j+2}`,
+                            `${xAxis[i+1]}${j-2}`,
+                            `${xAxis[i-1]}${j+2}`,
+                            `${xAxis[i-1]}${j-2}`,
+                            `${xAxis[i-2]}${j+1}`,
+                            `${xAxis[i-2]}${j-1}`,
+                            `${xAxis[i+2]}${j+1}`,
+                            `${xAxis[i+2]}${j-1}`
+                        ];
+                    }
+                }
+            }
+            const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+       
+            state.movableAreas = state.movableAreas.filter(obj=> !user2StonesId.includes(obj))
+             //! ----------------------------------------------
+             }
+           
                 }
                 
             }
