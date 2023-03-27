@@ -62,7 +62,10 @@ const gameSlice = createSlice({
         eatableIndexes:[],
         friendStones:[],
         falseItems:[],
-        minfalse: 2
+        minfalse: 9,
+        maxFalse:0,
+        leftfalse:-1,
+        rightfalse:8,
     },
     reducers:{
         openResult: (state) =>{
@@ -121,6 +124,7 @@ const gameSlice = createSlice({
         },
      
         selectStone:(state,action)=>{
+            state.eatableIndexes.length= 0
             state.showHint=true
             state.selectedStone = action.payload
             console.log(state.selectedStone)
@@ -336,49 +340,206 @@ const gameSlice = createSlice({
             state.falseItems.length = 0
     
             // console.log(forwardStone)
-            // Yukarı
-            for(let i = y; i <= 8; i++){
-                let forwardStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i+1)
-             
-                if(forwardStone !== undefined)
-                {   if(forwardStone.isEmpty === false){
-                    state.falseItems.push(forwardStone.positionY)
-                    
-                }}
-                  
-                    state.minfalse = Math.min.apply(Math,state.falseItems) 
-            
-                }
-                console.log(state.minfalse)
-            for(let i = y+1; i<state.minfalse; i++){
-                let movableArea = state.board.find((obj)=> obj.positionX === x && obj.positionY === i)
-                state.movableAreas.push(movableArea.id)
-            }
-             // Aşağı
-             if(y !== 1){
-                let backFalseItems=[]
-                let maxFalse = undefined
-                for(let i = y; i <= 1; i--){
-                   let backStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i-1)
+            //* UP
+            if(y < 8){
+                state.falseItems = [state.minfalse]
+                for(let i = y; i <= 8; i++){
+                    let forwardStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i+1)
+                    if(forwardStone !== undefined)
+                    {   if(forwardStone.isEmpty === false){
+                        state.falseItems.push(forwardStone.positionY)
+                        
+                    }}
+                        
+                        state.minfalse = Math.min.apply(Math,state.falseItems)
+                        if(forwardStone !== undefined){
+                            const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+    
+                            if( forwardStone.positionY === state.minfalse){
+                                if(!user1StonesId.includes(forwardStone.id)){
+                                    state.eatableIndexes.push(forwardStone.id)
+                                }
+                            }
+                        }
                 
+                    }
+                    console.log(state.minfalse)
+                for(let i = y+1; i<state.minfalse; i++){
+                    let movableArea = state.board.find((obj)=> obj.positionX === x && obj.positionY === i)
+                    state.movableAreas.push(state.eatableIndexes)
+                    state.movableAreas.push(movableArea.id)
+                }
+                state.minfalse = 9;
+            }
+             //* Down
+             if(y>1){
+                 const backFalseItems=[state.maxFalse]
+               for(let i = y; i >=1; i--){
+                   let backStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i-1)
+                    console.log(backStone)
                    if(backStone !== undefined)
                    {   if(backStone.isEmpty === false){
                        backFalseItems.push(backStone.positionY)
                        
-                   }}
-                     
-                   maxFalse = Math.max.apply(Math,state.falseItems) 
-               
                    }
-                   console.log(maxFalse)
-               for(let i = y-1; i>maxFalse; i--){
-                   let movableArea = state.board.find((obj)=> obj.positionX === x && obj.positionY === i)
-                   state.movableAreas.push(movableArea.id)
+                }
+                   console.log(backFalseItems)
+                   state.maxFalse = Math.max.apply(Math,backFalseItems) 
+                   if(backStone !== undefined){
+                       const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                    if( backStone.positionY === state.maxFalse){
+                        console.log(current(backStone))
+                        if(!user1StonesId.includes(backStone.id)){
+                            state.eatableIndexes.push(backStone.id)
+                        }
+                    }
+                    state.eatableIndexes = state.eatableIndexes.filter(obj=> !user1StonesId.includes(obj))
+
+                }
+                   }
+                   
+                       for(let i = y-1; i>state.maxFalse; i--){
+                           let movableArea = state.board.find((obj)=> obj.positionX === x && obj.positionY === i)
+                           state.movableAreas.push(movableArea.id)
+                           state.movableAreas.push(state.eatableIndexes)
+                        }
+                        state.maxFalse = 0
+                        
+                    }
+                    
+             //* Left
+           if(x !== "a") 
+           { const xAxis = ["a","b","c","d","e","f","g","h"]
+             let horizentalIndex = xAxis.indexOf(x) -1
+             let leftfalseItems= [xAxis[state.leftfalse]]
+             for(let i = horizentalIndex; i >= 0; i-- ){
+                let leftStone =state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+               if(leftStone !== undefined)
+               {   if(leftStone.isEmpty === false){
+                   leftfalseItems.push(leftStone.positionX)
+                   
                }
-             }
-          
+            }
+                let indexesOfLetters = leftfalseItems.map((x) => xAxis.indexOf(x) )
+         
+               state.leftfalse = Math.max.apply(Math,indexesOfLetters) 
+               console.log(state.leftfalse)
+               if(leftStone !== undefined){  
+                 const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                if( leftStone.positionX === xAxis[state.leftfalse]){
+                    if(!user1StonesId.includes(leftStone.id)){
+                        state.eatableIndexes.push(leftStone.id)
+                    }
+                }
+            }
+
+
+            }
+            for(let i = horizentalIndex; i>state.leftfalse; i--){
+                console.log(state.leftfalse)
+                let movableArea = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                state.movableAreas.push(movableArea.id)
+                state.movableAreas.push(state.eatableIndexes)
+            }}
+            state.leftfalse = -1
+             //* Right
+           if(x !== "h") 
+           { 
+            const xAxis = ["a","b","c","d","e","f","g","h"]
+           let horizentalIndex = xAxis.indexOf(x) +1
+           console.log(horizentalIndex)
+           let rightfalseItems= [xAxis[state.rightfalse]]
+           for(let i = horizentalIndex; i <= 7; i++ ){
+               let rightStone =state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                if(rightStone !== undefined)
+               {   if(rightStone.isEmpty === false){
+                   rightfalseItems.push(rightStone.positionX)
+                   
+               }
+            }
+            if(rightfalseItems === undefined){
+                state.rightfalse = 8
+            }
+                rightfalseItems = rightfalseItems.filter((obj) => obj !== undefined)
+                let indexesOfLetters = rightfalseItems.map((x) => xAxis.indexOf(x) )
+       
+               
+              
+                    state.rightfalse = Math.min.apply(Math,indexesOfLetters) 
+                
+               if(rightStone !== undefined){  
+                 const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                if( rightStone.positionX === xAxis[state.rightfalse]){
+                    if(!user1StonesId.includes(rightStone.id)){
+                        state.eatableIndexes.push(rightStone.id)
+                    }
+                }
+            }
+
+
         }
+        if(rightfalseItems.length === 0){
+            state.rightfalse = 8
+        }
+            for(let i = horizentalIndex; i<state.rightfalse; i++){
+                console.log(state.rightfalse)
+                let movableArea = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                state.movableAreas.push(movableArea.id)
+                state.movableAreas.push(state.eatableIndexes)
+            }
+            state.rightfalse = 8
+        }
+            console.log(state.eatableIndexes)
+            state.movableAreas.push(state.eatableIndexes)
+        }
+        //!---------------------------------------------
+        //! MOVABLE AND EATABLE AREAS FOR WHITE-KNIGHT
+        if(state.selectedObj.name === "white-bishop"){
+            state.movableAreas.length = 0
+            state.eatableIndexes.length = 0
+            //*Top Right Diagonal
+            const xAxis = ["a","b","c","d","e","f","g","h"]
+             let counter  = 1
+             let horizentalIndex = xAxis.indexOf(x)+1 
+             let rightTopfalseItems= []
+             let minFalse = y+1
+             let maxVal = 8
+                for(let i = horizentalIndex; i < 8; i++){
+                    let diagonalStone = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y+counter )
+                    counter++
+                    console.log(current(diagonalStone))
+                    if(diagonalStone !== undefined){
+                        if(diagonalStone.isEmpty === false){
+                            rightTopfalseItems.push(diagonalStone)
+                        }
+                    }
+                    rightTopfalseItems = rightTopfalseItems.filter((obj) => obj !== undefined)
+                    let indexesOfY = rightTopfalseItems.map((obj) =>  obj.positionY  )
+                    minFalse = Math.min.apply(Math,indexesOfY) 
+                    
+                    if(diagonalStone !== undefined){  
+                        const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                       if( diagonalStone.positionY === minFalse ){
+                           if(!user1StonesId.includes(diagonalStone.id)){
+                               state.eatableIndexes.push(diagonalStone.id)
+                           }
+                       }
+                   }
+                    if(rightTopfalseItems.length === 0){
+                        state.movableAreas.push(diagonalStone.id)
+                        if(state.eatableIndexes.length > 0){
+                            state.movableAreas.push(state.eatableIndexes)
+                        }
+                    }
+                }
+                console.log(current(state.movableAreas))
+              
+                 
+                  
+                
             
+        }
+        //!---------------------------------------------
             }
         }
             if(state.player === "black"){
@@ -566,7 +727,7 @@ const gameSlice = createSlice({
                         }
                     }
                     //*-------------
-                       //! MOVABLE AND EATABLE AREAS FOR WHITE KNIGHT
+                       //! MOVABLE AND EATABLE AREAS FOR BLACK KNIGHT
              const xAxis = ["a","b","c","d","e","f","g","h"]
              if(state.selectedObj.name ==="black-knight"){
                 state.movableAreas.length = 0
@@ -589,9 +750,166 @@ const gameSlice = createSlice({
             const user2StonesId = state.user2.stones.map((obj)=>obj.id)
        
             state.movableAreas = state.movableAreas.filter(obj=> !user2StonesId.includes(obj))
-             //! ----------------------------------------------
-             }
-           
+        }
+        //! ----------------------------------------------
+                 //! MOVABLE AND EATABLE AREAS FOR BLACK-ROOK
+        if(state.selectedObj.name=== "black-rook"){
+            state.movableAreas.length = 0
+            state.falseItems.length = 0
+    
+            // console.log(forwardStone)
+            //* UP
+            if(y < 8){
+                state.falseItems = [state.minfalse]
+                for(let i = y; i <= 8; i++){
+                    let forwardStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i+1)
+                    if(forwardStone !== undefined)
+                    {   if(forwardStone.isEmpty === false){
+                        state.falseItems.push(forwardStone.positionY)
+                        
+                    }}
+                        
+                        state.minfalse = Math.min.apply(Math,state.falseItems)
+                        if(forwardStone !== undefined){
+                            const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+    
+                            if( forwardStone.positionY === state.minfalse){
+                                if(!user2StonesId.includes(forwardStone.id)){
+                                    state.eatableIndexes.push(forwardStone.id)
+                                }
+                            }
+                        }
+                
+                    }
+                    console.log(state.minfalse)
+                for(let i = y+1; i<state.minfalse; i++){
+                    let movableArea = state.board.find((obj)=> obj.positionX === x && obj.positionY === i)
+                    state.movableAreas.push(state.eatableIndexes)
+                    state.movableAreas.push(movableArea.id)
+                }
+                state.minfalse = 9;
+            }
+             //* Down
+             if(y>1){
+                 const backFalseItems=[state.maxFalse]
+               for(let i = y; i >=1; i--){
+                   let backStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i-1)
+                    console.log(backStone)
+                   if(backStone !== undefined)
+                   {   if(backStone.isEmpty === false){
+                       backFalseItems.push(backStone.positionY)
+                       
+                   }
+                }
+                   console.log(backFalseItems)
+                   state.maxFalse = Math.max.apply(Math,backFalseItems) 
+                   if(backStone !== undefined){
+                       const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+                    if( backStone.positionY === state.maxFalse){
+                        console.log(current(backStone))
+                        if(!user2StonesId.includes(backStone.id)){
+                            state.eatableIndexes.push(backStone.id)
+                        }
+                    }
+                    state.eatableIndexes = state.eatableIndexes.filter(obj=> !user2StonesId.includes(obj))
+
+                }
+                   }
+                   
+                       for(let i = y-1; i>state.maxFalse; i--){
+                           let movableArea = state.board.find((obj)=> obj.positionX === x && obj.positionY === i)
+                           state.movableAreas.push(movableArea.id)
+                           state.movableAreas.push(state.eatableIndexes)
+                        }
+                        state.maxFalse = 0
+                        
+                    }
+                    
+             //* Left
+           if(x !== "a") 
+           { const xAxis = ["a","b","c","d","e","f","g","h"]
+             let horizentalIndex = xAxis.indexOf(x) -1
+             let leftfalseItems= [xAxis[state.leftfalse]]
+             for(let i = horizentalIndex; i >= 0; i-- ){
+                let leftStone =state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+               if(leftStone !== undefined)
+               {   if(leftStone.isEmpty === false){
+                   leftfalseItems.push(leftStone.positionX)
+                   
+               }
+            }
+                let indexesOfLetters = leftfalseItems.map((x) => xAxis.indexOf(x) )
+         
+               state.leftfalse = Math.max.apply(Math,indexesOfLetters) 
+               console.log(state.leftfalse)
+               if(leftStone !== undefined){  
+                 const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+                if( leftStone.positionX === xAxis[state.leftfalse]){
+                    if(!user2StonesId.includes(leftStone.id)){
+                        state.eatableIndexes.push(leftStone.id)
+                    }
+                }
+            }
+
+
+            }
+            for(let i = horizentalIndex; i>state.leftfalse; i--){
+                console.log(state.leftfalse)
+                let movableArea = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                state.movableAreas.push(movableArea.id)
+                state.movableAreas.push(state.eatableIndexes)
+            }}
+            state.leftfalse = -1
+             //* Right
+           if(x !== "h") 
+           { const xAxis = ["a","b","c","d","e","f","g","h"]
+           let horizentalIndex = xAxis.indexOf(x) +1
+           console.log(horizentalIndex)
+           let rightfalseItems= [xAxis[state.rightfalse]]
+           for(let i = horizentalIndex; i <= 7; i++ ){
+               let rightStone =state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                if(rightStone !== undefined)
+               {   if(rightStone.isEmpty === false){
+                   rightfalseItems.push(rightStone.positionX)
+                   
+               }
+            }
+            if(rightfalseItems === undefined){
+                state.rightfalse = 8
+            }
+                rightfalseItems = rightfalseItems.filter((obj) => obj !== undefined)
+                let indexesOfLetters = rightfalseItems.map((x) => xAxis.indexOf(x) )
+       
+               
+              
+                    state.rightfalse = Math.min.apply(Math,indexesOfLetters) 
+                
+               if(rightStone !== undefined){  
+                 const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+                if( rightStone.positionX === xAxis[state.rightfalse]){
+                    if(!user2StonesId.includes(rightStone.id)){
+                        state.eatableIndexes.push(rightStone.id)
+                    }
+                }
+            }
+
+
+        }
+        if(rightfalseItems.length === 0){
+            state.rightfalse = 8
+        }
+            for(let i = horizentalIndex; i<state.rightfalse; i++){
+                console.log(state.rightfalse)
+                let movableArea = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                state.movableAreas.push(movableArea.id)
+                state.movableAreas.push(state.eatableIndexes)
+            }
+            state.rightfalse = 8
+        }
+            console.log(state.eatableIndexes)
+            state.movableAreas.push(state.eatableIndexes)
+        }
+        //!---------------------------------------------
                 }
                 
             }
