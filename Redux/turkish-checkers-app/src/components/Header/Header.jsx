@@ -14,7 +14,7 @@ const dispatch = useDispatch()
     const handleReset = ()=>{
 
         dispatch(resetGame())
-        dispatch(setShowUserForm(true))
+        // dispatch(setShowUserForm(true))
     }
   return (
     <div className='header'>

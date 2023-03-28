@@ -83,7 +83,6 @@ const gameSlice = createSlice({
             state.user2.stones = setBlackStones().flat()
             state.whiteStones = state.user1.stones
             state.blackStones = state.user2.stones
-            state.eatableStones=[]
             state.totalStones.push(state.whiteStones)
             state.totalStones.push(state.blackStones)
             console.log("totalStones",state.totalStones.flat())
@@ -95,7 +94,7 @@ const gameSlice = createSlice({
             state.gameStatus= "";
             state.user1.stones = setWhiteStones().flat()
             state.user2.stones = setBlackStones().flat()
-            state.board = configureStonesOnBoard()
+            state.board = configureBoard()
             state.user1={
             id:1,
             name: "",
@@ -120,7 +119,10 @@ const gameSlice = createSlice({
         state.movable= false
         state.theme="light"
         state.showUserForm= false
-        
+        state.movableAreas=[]
+        state.direction=""
+        state.selectedObj={} 
+        state.totalStones=[]
         },
      
         selectStone:(state,action)=>{
@@ -129,6 +131,7 @@ const gameSlice = createSlice({
             state.selectedStone = action.payload
             console.log(state.selectedStone)
             if(state.player ==="white"){
+                state.movableAreas.length = 0
              const Whitestones=current(state.user1.stones)
               state.selectedObj = Whitestones.find((obj)=> obj.id === state.selectedStone)
              if(state.selectedObj){
@@ -996,9 +999,16 @@ const gameSlice = createSlice({
 
         }
         //!---------------------------------------------
+        
+        //! MOVABLE AND EATABLE AREAS FOR WHITE KING 
+            if(state.selectedObj.name === "white-king"){
+                console.log(current(state.eatableIndexes))
+            }
+        //!---------------------------------------------
             }
         }
             if(state.player === "black"){
+                state.movableAreas.length = 0
                 const Blackstones=current(state.user2.stones)
                state.selectedObj = Blackstones.find((obj)=> obj.id === state.selectedStone)
                 if(state.selectedObj){
