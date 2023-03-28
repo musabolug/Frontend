@@ -510,6 +510,7 @@ const gameSlice = createSlice({
 
                 let maxVal = 8
                    for(let i = horizentalIndex; i < 8; i++){
+                    //*TOP
                     if(y !== 8){ 
                          let diagonalStone = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y+counter )
                        counter++
@@ -540,6 +541,7 @@ const gameSlice = createSlice({
                                state.movableAreas.push(state.eatableIndexes)
                            }
                        }}
+                       //*BOTTOM
                        if(y !== 1){
 
                            let diagonalStoneDownRight = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y-counterDown )
@@ -595,7 +597,7 @@ const gameSlice = createSlice({
                 let minFalseDown = y
 
                 for(let i = horizentalIndex; i >= 0; i--){
-
+                    //*TOP
                     if(y !== 8){   
                     let diagonalStone = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y+counter )
                     counter++
@@ -623,6 +625,7 @@ const gameSlice = createSlice({
                             state.movableAreas.push(state.eatableIndexes)
                         }
                     }}
+                    //*BOTTOM
                     if(y !== 1){
 
                         let diagonalStoneDownLeft = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y-counterDown )
@@ -665,6 +668,334 @@ const gameSlice = createSlice({
             //*--------------------------------------------------            
         }
         //!---------------------------------------------
+        
+        //! EATABLE AND MOVABLE AREAS FOR WHITE QUEEN
+        if(state.selectedObj.name === "white-queen"){
+            state.eatableIndexes.length = 0
+            state.movableAreas.length = 0
+                  //*Top Bottom Right Diagonals
+                  if(x !== "h"){
+                    const xAxis = ["a","b","c","d","e","f","g","h"]
+                    let counter  = 1
+                    let counterDown  = 1
+                    let horizentalIndex = xAxis.indexOf(x)+1 
+                    let rightTopfalseItems= []
+                    let rightBottomfalseItems= []
+                    let minFalse = y+1
+                    let minFalseDown = y
+    
+                    let maxVal = 8
+                       for(let i = horizentalIndex; i < 8; i++){
+                        //*TOP
+                        if(y !== 8){ 
+                             let diagonalStone = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y+counter )
+                           counter++
+                           if(diagonalStone !== undefined){
+                               if(diagonalStone.isEmpty === false){
+                                   rightTopfalseItems.push(diagonalStone)
+                               }
+                           }
+                          
+    
+                           rightTopfalseItems = rightTopfalseItems.filter((obj) => obj !== undefined)
+                           let indexesOfY = rightTopfalseItems.map((obj) =>  obj.positionY  )
+                           minFalse = Math.min.apply(Math,indexesOfY) 
+                           
+    
+                           if(diagonalStone !== undefined){  
+                               const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                              if( diagonalStone.positionY === minFalse ){
+                                  if(!user1StonesId.includes(diagonalStone.id)){
+                                       state.eatableIndexes.push(diagonalStone.id)
+                                  }
+                              }
+                          }
+                         
+                           if(rightTopfalseItems.length === 0){
+                               state.movableAreas.push(diagonalStone.id)
+                               if(state.eatableIndexes.length > -1){
+                                   state.movableAreas.push(state.eatableIndexes)
+                               }
+                           }}
+                           //*BOTTOM
+                           if(y !== 1){
+    
+                               let diagonalStoneDownRight = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y-counterDown )
+                               counterDown++
+                            
+                            if(diagonalStoneDownRight!== undefined){
+                                console.log(current(diagonalStoneDownRight))
+                                if(diagonalStoneDownRight.isEmpty === false){
+                                    rightBottomfalseItems.push(diagonalStoneDownRight)
+                                }
+                           }
+    
+                           
+                           rightBottomfalseItems = rightBottomfalseItems.filter((obj)=> obj !== undefined)
+                           let indexOfDownY = rightBottomfalseItems.map((obj)=> obj.positionY)
+                           minFalseDown = Math.max.apply(Math,indexOfDownY)
+    
+    
+                           if(diagonalStoneDownRight !== undefined){
+                            const user1StonesId = state.user1.stones.map((obj)=> obj.id)
+                            if(diagonalStoneDownRight.positionY === minFalseDown){
+                                if(!user1StonesId.includes(diagonalStoneDownRight.id)){
+                                    state.eatableIndexes.push(diagonalStoneDownRight.id)
+                                }
+                            }
+                          }
+    
+                            if(rightBottomfalseItems.length === 0){
+                                if(diagonalStoneDownRight !== undefined){
+                                    state.movableAreas.push(diagonalStoneDownRight.id)
+                                    if(state.eatableIndexes.length > -1){
+                                        state.movableAreas.push(state.eatableIndexes)
+                                    }
+                                }
+                               }
+                           }
+                          
+                       }
+                       
+                       console.log(current(state.movableAreas))
+                }
+                //*--------------------------------------------------
+              
+                //* Top Left Diagonal
+                  if(x !== "a"){
+                    const xAxis = ["a","b","c","d","e","f","g","h"]
+                    let counter  = 1
+                    let counterDown  = 1
+                    let horizentalIndex = xAxis.indexOf(x)-1 
+                    let leftTopfalseItems= []
+                    let leftBottomfalseItems= []
+                    let minFalse = y+1
+                    let minFalseDown = y
+    
+                    for(let i = horizentalIndex; i >= 0; i--){
+                        //*TOP
+                        if(y !== 8){   
+                        let diagonalStone = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y+counter )
+                        counter++
+                        if(diagonalStone !== undefined){
+                            console.log(current(diagonalStone))
+                            if(diagonalStone.isEmpty === false){
+                                leftTopfalseItems.push(diagonalStone)
+                            }
+                        }
+                        leftTopfalseItems = leftTopfalseItems.filter((obj) => obj !== undefined)
+                        let indexesOfY = leftTopfalseItems.map((obj) =>  obj.positionY  )
+                        minFalse = Math.min.apply(Math,indexesOfY) 
+                        
+                        if(diagonalStone !== undefined){  
+                            const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                           if( diagonalStone.positionY === minFalse ){
+                               if(!user1StonesId.includes(diagonalStone.id)){
+                                    state.eatableIndexes.push(diagonalStone.id)
+                               }
+                           }
+                       }
+                        if(leftTopfalseItems.length === 0){
+                            state.movableAreas.push(diagonalStone.id)
+                            if(state.eatableIndexes.length > -1){
+                                state.movableAreas.push(state.eatableIndexes)
+                            }
+                        }}
+                        //*BOTTOM
+                        if(y !== 1){
+    
+                            let diagonalStoneDownLeft = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y-counterDown )
+                            counterDown++
+                         
+                         if(diagonalStoneDownLeft!== undefined){
+                             console.log(current(diagonalStoneDownLeft))
+                             if(diagonalStoneDownLeft.isEmpty === false){
+                                leftBottomfalseItems.push(diagonalStoneDownLeft)
+                             }
+                        }
+    
+                        
+                        leftBottomfalseItems = leftBottomfalseItems.filter((obj)=> obj !== undefined)
+                        let indexOfDownY = leftBottomfalseItems.map((obj)=> obj.positionY)
+                        minFalseDown = Math.max.apply(Math,indexOfDownY)
+    
+    
+                        if(diagonalStoneDownLeft !== undefined){
+                         const user1StonesId = state.user1.stones.map((obj)=> obj.id)
+                         if(diagonalStoneDownLeft.positionY === minFalseDown){
+                             if(!user1StonesId.includes(diagonalStoneDownLeft.id)){
+                                 state.eatableIndexes.push(diagonalStoneDownLeft.id)
+                             }
+                         }
+                       }
+    
+                         if(leftBottomfalseItems.length === 0){
+                             if(diagonalStoneDownLeft !== undefined){
+                                 state.movableAreas.push(diagonalStoneDownLeft.id)
+                                 if(state.eatableIndexes.length > -1){
+                                     state.movableAreas.push(state.eatableIndexes)
+                                 }
+                             }
+                            }
+                        }
+                    }
+                    console.log(current(state.movableAreas))
+                  }
+                //*--------------------------------------------------          
+             //* UP
+             if(y < 8){
+                state.falseItems = [state.minfalse]
+                for(let i = y; i <= 8; i++){
+                    let forwardStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i+1)
+                    if(forwardStone !== undefined)
+                    {   if(forwardStone.isEmpty === false){
+                        state.falseItems.push(forwardStone.positionY)
+                        
+                    }}
+                        
+                        state.minfalse = Math.min.apply(Math,state.falseItems)
+                        if(forwardStone !== undefined){
+                            const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+    
+                            if( forwardStone.positionY === state.minfalse){
+                                if(!user1StonesId.includes(forwardStone.id)){
+                                    state.eatableIndexes.push(forwardStone.id)
+                                }
+                            }
+                        }
+                
+                    }
+                    console.log(state.minfalse)
+                for(let i = y+1; i<state.minfalse; i++){
+                    let movableArea = state.board.find((obj)=> obj.positionX === x && obj.positionY === i)
+                    state.movableAreas.push(state.eatableIndexes)
+                    state.movableAreas.push(movableArea.id)
+                }
+                state.minfalse = 9;
+            }
+             //* Down
+             if(y>1){
+                 const backFalseItems=[state.maxFalse]
+               for(let i = y; i >=1; i--){
+                   let backStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i-1)
+                    console.log(backStone)
+                   if(backStone !== undefined)
+                   {   if(backStone.isEmpty === false){
+                       backFalseItems.push(backStone.positionY)
+                       
+                   }
+                }
+                   console.log(backFalseItems)
+                   state.maxFalse = Math.max.apply(Math,backFalseItems) 
+                   if(backStone !== undefined){
+                       const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                    if( backStone.positionY === state.maxFalse){
+                        console.log(current(backStone))
+                        if(!user1StonesId.includes(backStone.id)){
+                            state.eatableIndexes.push(backStone.id)
+                        }
+                    }
+                    state.eatableIndexes = state.eatableIndexes.filter(obj=> !user1StonesId.includes(obj))
+
+                }
+                   }
+                   
+                       for(let i = y-1; i>state.maxFalse; i--){
+                           let movableArea = state.board.find((obj)=> obj.positionX === x && obj.positionY === i)
+                           state.movableAreas.push(movableArea.id)
+                           state.movableAreas.push(state.eatableIndexes)
+                        }
+                        state.maxFalse = 0
+                        
+                    }
+                    
+             //* Left
+           if(x !== "a") 
+           { const xAxis = ["a","b","c","d","e","f","g","h"]
+             let horizentalIndex = xAxis.indexOf(x) -1
+             let leftfalseItems= [xAxis[state.leftfalse]]
+             for(let i = horizentalIndex; i >= 0; i-- ){
+                let leftStone =state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+               if(leftStone !== undefined)
+               {   if(leftStone.isEmpty === false){
+                   leftfalseItems.push(leftStone.positionX)
+                   
+               }
+            }
+                let indexesOfLetters = leftfalseItems.map((x) => xAxis.indexOf(x) )
+         
+               state.leftfalse = Math.max.apply(Math,indexesOfLetters) 
+               console.log(state.leftfalse)
+               if(leftStone !== undefined){  
+                 const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                if( leftStone.positionX === xAxis[state.leftfalse]){
+                    if(!user1StonesId.includes(leftStone.id)){
+                        state.eatableIndexes.push(leftStone.id)
+                    }
+                }
+            }
+
+
+            }
+            for(let i = horizentalIndex; i>state.leftfalse; i--){
+                console.log(state.leftfalse)
+                let movableArea = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                state.movableAreas.push(movableArea.id)
+                state.movableAreas.push(state.eatableIndexes)
+            }}
+            state.leftfalse = -1
+             //* Right
+           if(x !== "h") 
+           { 
+            const xAxis = ["a","b","c","d","e","f","g","h"]
+           let horizentalIndex = xAxis.indexOf(x) +1
+           console.log(horizentalIndex)
+           let rightfalseItems= [xAxis[state.rightfalse]]
+           for(let i = horizentalIndex; i <= 7; i++ ){
+               let rightStone =state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                if(rightStone !== undefined)
+               {   if(rightStone.isEmpty === false){
+                   rightfalseItems.push(rightStone.positionX)
+                   
+               }
+            }
+            if(rightfalseItems === undefined){
+                state.rightfalse = 8
+            }
+                rightfalseItems = rightfalseItems.filter((obj) => obj !== undefined)
+                let indexesOfLetters = rightfalseItems.map((x) => xAxis.indexOf(x) )
+       
+               
+              
+                    state.rightfalse = Math.min.apply(Math,indexesOfLetters) 
+                
+               if(rightStone !== undefined){  
+                 const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                if( rightStone.positionX === xAxis[state.rightfalse]){
+                    if(!user1StonesId.includes(rightStone.id)){
+                        state.eatableIndexes.push(rightStone.id)
+                    }
+                }
+            }
+
+
+        }
+        if(rightfalseItems.length === 0){
+            state.rightfalse = 8
+        }
+            for(let i = horizentalIndex; i<state.rightfalse; i++){
+                console.log(state.rightfalse)
+                let movableArea = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                state.movableAreas.push(movableArea.id)
+                state.movableAreas.push(state.eatableIndexes)
+            }
+            state.rightfalse = 8
+        }
+            console.log(state.eatableIndexes)
+            state.movableAreas.push(state.eatableIndexes)
+
+        }
+        //!---------------------------------------------
             }
         }
             if(state.player === "black"){
@@ -677,7 +1008,7 @@ const gameSlice = createSlice({
                     const x = state.selectedObj.positionX
                     const y = state.selectedObj.positionY
 
-                     //* EATABLE AREAS for Black- pawn
+                     //! EATABLE AREAS FOR BLACK PAWN
                      let isBlocked = false
                      const eatableStones = [] 
                      if(state.selectedObj.name ==="black-pawn"){
@@ -1206,6 +1537,330 @@ const gameSlice = createSlice({
               }
             //*--------------------------------------------------            
         }
+        //!---------------------------------------------
+        
+        //! MOVABLE AND EATABLE AREAS FOR BLACK QUEEN
+        if(state.selectedObj.name === "black-queen"){
+            state.movableAreas.length = 0
+            state.eatableIndexes.length = 0
+            //*Top Bottom Right Diagonals
+            if(x !== "h"){
+                const xAxis = ["a","b","c","d","e","f","g","h"]
+                let counter  = 1
+                let counterDown  = 1
+                let horizentalIndex = xAxis.indexOf(x)+1 
+                let rightTopfalseItems= []
+                let rightBottomfalseItems= []
+                let minFalse = y+1
+                let minFalseDown = y
+
+                   for(let i = horizentalIndex; i < 8; i++){
+                    if(y !== 8){ 
+                         let diagonalStone = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y+counter )
+                       counter++
+                       if(diagonalStone !== undefined){
+                           if(diagonalStone.isEmpty === false){
+                               rightTopfalseItems.push(diagonalStone)
+                           }
+                       }
+                      
+
+                       rightTopfalseItems = rightTopfalseItems.filter((obj) => obj !== undefined)
+                       let indexesOfY = rightTopfalseItems.map((obj) =>  obj.positionY  )
+                       minFalse = Math.min.apply(Math,indexesOfY) 
+                       
+
+                       if(diagonalStone !== undefined){  
+                           const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+                          if( diagonalStone.positionY === minFalse ){
+                              if(!user2StonesId.includes(diagonalStone.id)){
+                                   state.eatableIndexes.push(diagonalStone.id)
+                              }
+                          }
+                      }
+                     
+                       if(rightTopfalseItems.length === 0){
+                        if(diagonalStone !== undefined){
+                            state.movableAreas.push(diagonalStone.id)
+                        }
+                           if(state.eatableIndexes.length > -1){
+                               state.movableAreas.push(state.eatableIndexes)
+                           }
+                       }}
+                       if(y !== 1){
+
+                           let diagonalStoneDownRight = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y-counterDown )
+                           counterDown++
+                        
+                        if(diagonalStoneDownRight!== undefined){
+                            console.log(current(diagonalStoneDownRight))
+                            if(diagonalStoneDownRight.isEmpty === false){
+                                rightBottomfalseItems.push(diagonalStoneDownRight)
+                            }
+                       }
+
+                       
+                       rightBottomfalseItems = rightBottomfalseItems.filter((obj)=> obj !== undefined)
+                       let indexOfDownY = rightBottomfalseItems.map((obj)=> obj.positionY)
+                       minFalseDown = Math.max.apply(Math,indexOfDownY)
+
+
+                       if(diagonalStoneDownRight !== undefined){
+                        const user2StonesId = state.user2.stones.map((obj)=> obj.id)
+                        if(diagonalStoneDownRight.positionY === minFalseDown){
+                            if(!user2StonesId.includes(diagonalStoneDownRight.id)){
+                                state.eatableIndexes.push(diagonalStoneDownRight.id)
+                            }
+                        }
+                      }
+
+                        if(rightBottomfalseItems.length === 0){
+                            if(diagonalStoneDownRight !== undefined){
+                                state.movableAreas.push(diagonalStoneDownRight.id)
+                                if(state.eatableIndexes.length > -1){
+                                    state.movableAreas.push(state.eatableIndexes)
+                                }
+                            }
+                           }
+                       }
+                      
+                   }
+                   
+            }
+            //*--------------------------------------------------
+          
+            //* Top Left Diagonal
+              if(x !== "a"){
+                const xAxis = ["a","b","c","d","e","f","g","h"]
+                let counter  = 1
+                let counterDown  = 1
+                let horizentalIndex = xAxis.indexOf(x)-1 
+                let leftTopfalseItems= []
+                let leftBottomfalseItems= []
+                let minFalse = y+1
+                let minFalseDown = y
+
+                for(let i = horizentalIndex; i >= 0; i--){
+
+                    if(y !== 8){   
+                    let diagonalStone = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y+counter )
+                    counter++
+                    if(diagonalStone !== undefined){
+                        if(diagonalStone.isEmpty === false){
+                            leftTopfalseItems.push(diagonalStone)
+                        }
+                    }
+                    leftTopfalseItems = leftTopfalseItems.filter((obj) => obj !== undefined)
+                    let indexesOfY = leftTopfalseItems.map((obj) =>  obj.positionY  )
+                    minFalse = Math.min.apply(Math,indexesOfY) 
+                    
+                    if(diagonalStone !== undefined){  
+                        const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+                       if( diagonalStone.positionY === minFalse ){
+                           if(!user2StonesId.includes(diagonalStone.id)){
+                                state.eatableIndexes.push(diagonalStone.id)
+                           }
+                       }
+                   }
+                    if(leftTopfalseItems.length === 0){
+                        if(diagonalStone !== undefined){
+                            state.movableAreas.push(diagonalStone.id)
+                        }
+                        if(state.eatableIndexes.length > -1){
+                            state.movableAreas.push(state.eatableIndexes)
+                        }
+                    }}
+                    if(y !== 1){
+
+                        let diagonalStoneDownLeft = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y-counterDown )
+                        counterDown++
+                     
+                     if(diagonalStoneDownLeft!== undefined){
+                         console.log(current(diagonalStoneDownLeft))
+                         if(diagonalStoneDownLeft.isEmpty === false){
+                            leftBottomfalseItems.push(diagonalStoneDownLeft)
+                         }
+                    }
+
+                    
+                    leftBottomfalseItems = leftBottomfalseItems.filter((obj)=> obj !== undefined)
+                    let indexOfDownY = leftBottomfalseItems.map((obj)=> obj.positionY)
+                    minFalseDown = Math.max.apply(Math,indexOfDownY)
+
+
+                    if(diagonalStoneDownLeft !== undefined){
+                     const user2StonesId = state.user2.stones.map((obj)=> obj.id)
+                     if(diagonalStoneDownLeft.positionY === minFalseDown){
+                         if(!user2StonesId.includes(diagonalStoneDownLeft.id)){
+                             state.eatableIndexes.push(diagonalStoneDownLeft.id)
+                         }
+                     }
+                   }
+
+                     if(leftBottomfalseItems.length === 0){
+                         if(diagonalStoneDownLeft !== undefined){
+                             state.movableAreas.push(diagonalStoneDownLeft.id)
+                             if(state.eatableIndexes.length > -1){
+                                 state.movableAreas.push(state.eatableIndexes)
+                             }
+                         }
+                        }
+                    }
+                }
+              }
+            //*--------------------------------------------------        
+                 //* UP
+                 if(y < 8){
+                    state.falseItems = [state.minfalse]
+                    for(let i = y; i <= 8; i++){
+                        let forwardStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i+1)
+                        if(forwardStone !== undefined)
+                        {   if(forwardStone.isEmpty === false){
+                            state.falseItems.push(forwardStone.positionY)
+                            
+                        }}
+                            
+                            state.minfalse = Math.min.apply(Math,state.falseItems)
+                            if(forwardStone !== undefined){
+                                const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+        
+                                if( forwardStone.positionY === state.minfalse){
+                                    if(!user2StonesId.includes(forwardStone.id)){
+                                        state.eatableIndexes.push(forwardStone.id)
+                                    }
+                                }
+                            }
+                    
+                        }
+                        console.log(state.minfalse)
+                    for(let i = y+1; i<state.minfalse; i++){
+                        let movableArea = state.board.find((obj)=> obj.positionX === x && obj.positionY === i)
+                        state.movableAreas.push(state.eatableIndexes)
+                        state.movableAreas.push(movableArea.id)
+                    }
+                    state.minfalse = 9;
+                }
+                 //* Down
+                 if(y>1){
+                     const backFalseItems=[state.maxFalse]
+                   for(let i = y; i >=1; i--){
+                       let backStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i-1)
+                        console.log(backStone)
+                       if(backStone !== undefined)
+                       {   if(backStone.isEmpty === false){
+                           backFalseItems.push(backStone.positionY)
+                           
+                       }
+                    }
+                       console.log(backFalseItems)
+                       state.maxFalse = Math.max.apply(Math,backFalseItems) 
+                       if(backStone !== undefined){
+                           const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+                        if( backStone.positionY === state.maxFalse){
+                            console.log(current(backStone))
+                            if(!user2StonesId.includes(backStone.id)){
+                                state.eatableIndexes.push(backStone.id)
+                            }
+                        }
+                        state.eatableIndexes = state.eatableIndexes.filter(obj=> !user2StonesId.includes(obj))
+    
+                    }
+                       }
+                       
+                           for(let i = y-1; i>state.maxFalse; i--){
+                               let movableArea = state.board.find((obj)=> obj.positionX === x && obj.positionY === i)
+                               state.movableAreas.push(movableArea.id)
+                               state.movableAreas.push(state.eatableIndexes)
+                            }
+                            state.maxFalse = 0
+                            
+                        }
+                        
+                 //* Left
+               if(x !== "a") 
+               { const xAxis = ["a","b","c","d","e","f","g","h"]
+                 let horizentalIndex = xAxis.indexOf(x) -1
+                 let leftfalseItems= [xAxis[state.leftfalse]]
+                 for(let i = horizentalIndex; i >= 0; i-- ){
+                    let leftStone =state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                   if(leftStone !== undefined)
+                   {   if(leftStone.isEmpty === false){
+                       leftfalseItems.push(leftStone.positionX)
+                       
+                   }
+                }
+                    let indexesOfLetters = leftfalseItems.map((x) => xAxis.indexOf(x) )
+             
+                   state.leftfalse = Math.max.apply(Math,indexesOfLetters) 
+                   console.log(state.leftfalse)
+                   if(leftStone !== undefined){  
+                     const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+                    if( leftStone.positionX === xAxis[state.leftfalse]){
+                        if(!user2StonesId.includes(leftStone.id)){
+                            state.eatableIndexes.push(leftStone.id)
+                        }
+                    }
+                }
+    
+    
+                }
+                for(let i = horizentalIndex; i>state.leftfalse; i--){
+                    console.log(state.leftfalse)
+                    let movableArea = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                    state.movableAreas.push(movableArea.id)
+                    state.movableAreas.push(state.eatableIndexes)
+                }}
+                state.leftfalse = -1
+                 //* Right
+               if(x !== "h") 
+               { const xAxis = ["a","b","c","d","e","f","g","h"]
+               let horizentalIndex = xAxis.indexOf(x) +1
+               console.log(horizentalIndex)
+               let rightfalseItems= [xAxis[state.rightfalse]]
+               for(let i = horizentalIndex; i <= 7; i++ ){
+                   let rightStone =state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                    if(rightStone !== undefined)
+                   {   if(rightStone.isEmpty === false){
+                       rightfalseItems.push(rightStone.positionX)
+                       
+                   }
+                }
+                if(rightfalseItems === undefined){
+                    state.rightfalse = 8
+                }
+                    rightfalseItems = rightfalseItems.filter((obj) => obj !== undefined)
+                    let indexesOfLetters = rightfalseItems.map((x) => xAxis.indexOf(x) )
+           
+                   
+                  
+                        state.rightfalse = Math.min.apply(Math,indexesOfLetters) 
+                    
+                   if(rightStone !== undefined){  
+                     const user2StonesId = state.user2.stones.map((obj)=>obj.id)
+                    if( rightStone.positionX === xAxis[state.rightfalse]){
+                        if(!user2StonesId.includes(rightStone.id)){
+                            state.eatableIndexes.push(rightStone.id)
+                        }
+                    }
+                }
+    
+    
+            }
+            if(rightfalseItems.length === 0){
+                state.rightfalse = 8
+            }
+                for(let i = horizentalIndex; i<state.rightfalse; i++){
+                    console.log(state.rightfalse)
+                    let movableArea = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
+                    state.movableAreas.push(movableArea.id)
+                    state.movableAreas.push(state.eatableIndexes)
+                }
+                state.rightfalse = 8
+            }
+                console.log(state.eatableIndexes)
+                state.movableAreas.push(state.eatableIndexes)
+        }
+
         //!---------------------------------------------
                 }
                 
