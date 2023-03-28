@@ -66,6 +66,9 @@ const gameSlice = createSlice({
         maxFalse:0,
         leftfalse:-1,
         rightfalse:8,
+        renderEatableIndexes:[],
+        openPromote: true,
+        promotionObj:{} ,
     },
     reducers:{
         openResult: (state) =>{
@@ -123,6 +126,7 @@ const gameSlice = createSlice({
         state.direction=""
         state.selectedObj={} 
         state.totalStones=[]
+        
         },
      
         selectStone:(state,action)=>{
@@ -781,7 +785,6 @@ const gameSlice = createSlice({
                         let diagonalStone = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y+counter )
                         counter++
                         if(diagonalStone !== undefined){
-                            console.log(current(diagonalStone))
                             if(diagonalStone.isEmpty === false){
                                 leftTopfalseItems.push(diagonalStone)
                             }
@@ -811,7 +814,6 @@ const gameSlice = createSlice({
                             counterDown++
                          
                          if(diagonalStoneDownLeft!== undefined){
-                             console.log(current(diagonalStoneDownLeft))
                              if(diagonalStoneDownLeft.isEmpty === false){
                                 leftBottomfalseItems.push(diagonalStoneDownLeft)
                              }
@@ -881,7 +883,6 @@ const gameSlice = createSlice({
                  const backFalseItems=[state.maxFalse]
                for(let i = y; i >=1; i--){
                    let backStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === i-1)
-                    console.log(backStone)
                    if(backStone !== undefined)
                    {   if(backStone.isEmpty === false){
                        backFalseItems.push(backStone.positionY)
@@ -952,7 +953,6 @@ const gameSlice = createSlice({
            { 
             const xAxis = ["a","b","c","d","e","f","g","h"]
            let horizentalIndex = xAxis.indexOf(x) +1
-           console.log(horizentalIndex)
            let rightfalseItems= [xAxis[state.rightfalse]]
            for(let i = horizentalIndex; i <= 7; i++ ){
                let rightStone =state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y)
@@ -1002,7 +1002,50 @@ const gameSlice = createSlice({
         
         //! MOVABLE AND EATABLE AREAS FOR WHITE KING 
             if(state.selectedObj.name === "white-king"){
-                console.log(current(state.eatableIndexes))
+                const xAxis = ["a","b","c","d","e","f","g","h"]
+                let indexOfX = xAxis.indexOf(x)
+                let moves=[]
+                if(y!== 8){
+                    let upMove = state.board.find((obj)=> obj.positionX === x && obj.positionY === y+1)
+                    if(upMove !== undefined){ moves.push(upMove.id)}
+                }
+                if(x!=="a"){
+                    let leftMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX-1] && obj.positionY === y)
+                    if(leftMove !== undefined){moves.push(leftMove.id)}
+                    if(y!== 8){
+                        let diagonalUpLeftMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX-1] && obj.positionY === y+1)
+                        if(diagonalUpLeftMove !== undefined){moves.push(diagonalUpLeftMove.id)}
+                    }
+
+                }
+                if(x !== "h"){
+                    
+                    let rightMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX+1] && obj.positionY === y)
+                    if(rightMove !== undefined){ moves.push(rightMove.id)}
+                    if(y!== 8){
+                        let diagonalUpRightMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX+1] && obj.positionY === y+1)
+                        if(diagonalUpRightMove !== undefined){ moves.push(diagonalUpRightMove.id)}
+                    }
+                }
+                if(y !== 1){
+                    if(x!=="h"){
+                        let diagonalBottomRightMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX+1] && obj.positionY === y-1)
+                        if(diagonalBottomRightMove !== undefined){moves.push(diagonalBottomRightMove.id)}
+                    }
+                    let downMove = state.board.find((obj)=> obj.positionX === x && obj.positionY === y-1)
+                    if(downMove !== undefined){moves.push(downMove.id)}
+                    if(x!=="a"){
+                        let diagonalBottomLeftMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX-1] && obj.positionY === y-1)
+                        if(diagonalBottomLeftMove !== undefined){moves.push(diagonalBottomLeftMove.id)}
+                    }
+                }
+
+                for(let i = 0; i< moves.length; i++){
+                    let user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                    if(!user1StonesId.includes(moves[i])){
+                        state.movableAreas.push(moves[i])
+                    }
+                }
             }
         //!---------------------------------------------
             }
@@ -1151,10 +1194,12 @@ const gameSlice = createSlice({
                     //*Movable Areas for Black Pawn
                     const forwardStone =state.board.find((obj)=> obj.positionX === x && obj.positionY === Number(y-1))
                     const forwardStone2 =state.board.find((obj)=> obj.positionX === x && obj.positionY === Number(y-2))
-                    console.log("forward",current(forwardStone))
-                    if(forwardStone.isEmpty ===false){
-                        isBlocked = true
+                    if(forwardStone!== undefined){
+                        if(forwardStone.isEmpty ===false){
+                            isBlocked = true
+                        }
                     }
+                    
                     if(!isBlocked){
                         
                         if(state.selectedObj.positionY === 7){
@@ -1430,7 +1475,6 @@ const gameSlice = createSlice({
                            counterDown++
                         
                         if(diagonalStoneDownRight!== undefined){
-                            console.log(current(diagonalStoneDownRight))
                             if(diagonalStoneDownRight.isEmpty === false){
                                 rightBottomfalseItems.push(diagonalStoneDownRight)
                             }
@@ -1872,6 +1916,55 @@ const gameSlice = createSlice({
         }
 
         //!---------------------------------------------
+
+        //! MOVABLE AND EATABLE AREAS FOR BLACK KING
+        if(state.selectedObj.name==="black-king"){
+            const xAxis = ["a","b","c","d","e","f","g","h"]
+                let indexOfX = xAxis.indexOf(x)
+                let moves=[]
+                if(y!== 8){
+                    let upMove = state.board.find((obj)=> obj.positionX === x && obj.positionY === y+1)
+                    if(upMove !== undefined){ moves.push(upMove.id)}
+                }
+                if(x!=="a"){
+                    let leftMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX-1] && obj.positionY === y)
+                    if(leftMove !== undefined){moves.push(leftMove.id)}
+                    if(y!== 8){
+                        let diagonalUpLeftMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX-1] && obj.positionY === y+1)
+                        if(diagonalUpLeftMove !== undefined){moves.push(diagonalUpLeftMove.id)}
+                    }
+
+                }
+                if(x !== "h"){
+                    
+                    let rightMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX+1] && obj.positionY === y)
+                    if(rightMove !== undefined){ moves.push(rightMove.id)}
+                    if(y!== 8){
+                        let diagonalUpRightMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX+1] && obj.positionY === y+1)
+                        if(diagonalUpRightMove !== undefined){ moves.push(diagonalUpRightMove.id)}
+                    }
+                }
+                if(y !== 1){
+                    if(x!=="h"){
+                        let diagonalBottomRightMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX+1] && obj.positionY === y-1)
+                        if(diagonalBottomRightMove !== undefined){moves.push(diagonalBottomRightMove.id)}
+                    }
+                    let downMove = state.board.find((obj)=> obj.positionX === x && obj.positionY === y-1)
+                    if(downMove !== undefined){moves.push(downMove.id)}
+                    if(x!=="a"){
+                        let diagonalBottomLeftMove = state.board.find((obj)=> obj.positionX === xAxis[indexOfX-1] && obj.positionY === y-1)
+                        if(diagonalBottomLeftMove !== undefined){moves.push(diagonalBottomLeftMove.id)}
+                    }
+                }
+
+                for(let i = 0; i< moves.length; i++){
+                    let user2StonesId = state.user2.stones.map((obj)=>obj.id)
+                    if(!user2StonesId.includes(moves[i])){
+                        state.movableAreas.push(moves[i])
+                    }
+                }
+        }
+        //!---------------------------------------------
                 }
                 
             }
@@ -1913,15 +2006,11 @@ const gameSlice = createSlice({
             state.totalStones.push(state.user2.stones)
             console.log(state.totalStones)
             state.board = configureStonesOnBoard(state.totalStones.flat())           
-            // console.log("changedArray",state.user1.stones)
-            // console.log("totalStonesInMove",state.totalStones)
-        
 
             }
             if (state.player==="black") {
                 state.selectedObj = {...state.selectedObj, positionX:directionArray[0], positionY: directionArray[1]}
                 console.log(state.selectedObj)
-            //  console.log("ChangeObjectinArray",current(state.user2.stones).find((obj)=>obj.id === state.selectedObj.id) )
           
             const ChangeArray = current(state.user2.stones).map((obj)=>{
                 if(obj.id === state.selectedObj.id){
@@ -1947,12 +2036,27 @@ const gameSlice = createSlice({
             state.totalStones.push(state.user1.stones.flat())
             console.log(state.totalStones)
             state.board = configureStonesOnBoard(state.totalStones.flat())           
-            // console.log("changedArray",state.user2.stones.flat())
-            // console.log("user1",current(state.user1.stones).flatMap(obj=>obj))
-            // console.log("totalStonesInMove",current(state.totalStones).flatMap((obj)=>obj))
+
             
             }
-            
+            if(state.selectedObj.name=== "white-pawn"){
+                if(state.direction ==="a8" ||state.direction ==="b8" ||state.direction ==="c8" ||
+                state.direction ==="d8" ||state.direction ==="e8" ||state.direction ==="f8" ||
+                state.direction ==="h8"){
+                state.poromotePawnForm = true
+                }
+            }
+            if(state.selectedObj.name=== "black-pawn"){
+                  if(state.direction ==="a1" ||state.direction ==="b1" ||state.direction ==="c1" ||
+                state.direction ==="d1" ||state.direction ==="e1" ||state.direction ==="f1" ||
+                state.direction ==="h1"){
+                state.poromotePawnForm = true
+                }
+            }
+        },
+        poromotePawnForm:(state,action) =>{
+       state.promotionObj = action.payload
+       
         },
         setPlayer:(state,action)=>{
                 state.player = action.payload
