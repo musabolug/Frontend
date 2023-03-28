@@ -497,43 +497,171 @@ const gameSlice = createSlice({
         if(state.selectedObj.name === "white-bishop"){
             state.movableAreas.length = 0
             state.eatableIndexes.length = 0
-            //*Top Right Diagonal
-            const xAxis = ["a","b","c","d","e","f","g","h"]
-             let counter  = 1
-             let horizentalIndex = xAxis.indexOf(x)+1 
-             let rightTopfalseItems= []
-             let minFalse = y+1
-             let maxVal = 8
-                for(let i = horizentalIndex; i < 8; i++){
+            //*Top Bottom Right Diagonals
+            if(x !== "h"){
+                const xAxis = ["a","b","c","d","e","f","g","h"]
+                let counter  = 1
+                let counterDown  = 1
+                let horizentalIndex = xAxis.indexOf(x)+1 
+                let rightTopfalseItems= []
+                let rightBottomfalseItems= []
+                let minFalse = y+1
+                let minFalseDown = y
+
+                let maxVal = 8
+                   for(let i = horizentalIndex; i < 8; i++){
+                    if(y !== 8){ 
+                         let diagonalStone = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y+counter )
+                       counter++
+                       if(diagonalStone !== undefined){
+                           if(diagonalStone.isEmpty === false){
+                               rightTopfalseItems.push(diagonalStone)
+                           }
+                       }
+                      
+
+                       rightTopfalseItems = rightTopfalseItems.filter((obj) => obj !== undefined)
+                       let indexesOfY = rightTopfalseItems.map((obj) =>  obj.positionY  )
+                       minFalse = Math.min.apply(Math,indexesOfY) 
+                       
+
+                       if(diagonalStone !== undefined){  
+                           const user1StonesId = state.user1.stones.map((obj)=>obj.id)
+                          if( diagonalStone.positionY === minFalse ){
+                              if(!user1StonesId.includes(diagonalStone.id)){
+                                   state.eatableIndexes.push(diagonalStone.id)
+                              }
+                          }
+                      }
+                     
+                       if(rightTopfalseItems.length === 0){
+                           state.movableAreas.push(diagonalStone.id)
+                           if(state.eatableIndexes.length > -1){
+                               state.movableAreas.push(state.eatableIndexes)
+                           }
+                       }}
+                       if(y !== 1){
+
+                           let diagonalStoneDownRight = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y-counterDown )
+                           counterDown++
+                        
+                        if(diagonalStoneDownRight!== undefined){
+                            console.log(current(diagonalStoneDownRight))
+                            if(diagonalStoneDownRight.isEmpty === false){
+                                rightBottomfalseItems.push(diagonalStoneDownRight)
+                            }
+                       }
+
+                       
+                       rightBottomfalseItems = rightBottomfalseItems.filter((obj)=> obj !== undefined)
+                       let indexOfDownY = rightBottomfalseItems.map((obj)=> obj.positionY)
+                       minFalseDown = Math.max.apply(Math,indexOfDownY)
+
+
+                       if(diagonalStoneDownRight !== undefined){
+                        const user1StonesId = state.user1.stones.map((obj)=> obj.id)
+                        if(diagonalStoneDownRight.positionY === minFalseDown){
+                            if(!user1StonesId.includes(diagonalStoneDownRight.id)){
+                                state.eatableIndexes.push(diagonalStoneDownRight.id)
+                            }
+                        }
+                      }
+
+                        if(rightBottomfalseItems.length === 0){
+                            if(diagonalStoneDownRight !== undefined){
+                                state.movableAreas.push(diagonalStoneDownRight.id)
+                                if(state.eatableIndexes.length > -1){
+                                    state.movableAreas.push(state.eatableIndexes)
+                                }
+                            }
+                           }
+                       }
+                      
+                   }
+                   
+                   console.log(current(state.movableAreas))
+            }
+            //*--------------------------------------------------
+          
+            //* Top Left Diagonal
+              if(x !== "a"){
+                const xAxis = ["a","b","c","d","e","f","g","h"]
+                let counter  = 1
+                let counterDown  = 1
+                let horizentalIndex = xAxis.indexOf(x)-1 
+                let leftTopfalseItems= []
+                let leftBottomfalseItems= []
+                let minFalse = y+1
+                let minFalseDown = y
+
+                for(let i = horizentalIndex; i >= 0; i--){
                     let diagonalStone = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y+counter )
                     counter++
-                    console.log(current(diagonalStone))
                     if(diagonalStone !== undefined){
+                        console.log(current(diagonalStone))
                         if(diagonalStone.isEmpty === false){
-                            rightTopfalseItems.push(diagonalStone)
+                            leftTopfalseItems.push(diagonalStone)
                         }
                     }
-                    rightTopfalseItems = rightTopfalseItems.filter((obj) => obj !== undefined)
-                    let indexesOfY = rightTopfalseItems.map((obj) =>  obj.positionY  )
+                    leftTopfalseItems = leftTopfalseItems.filter((obj) => obj !== undefined)
+                    let indexesOfY = leftTopfalseItems.map((obj) =>  obj.positionY  )
                     minFalse = Math.min.apply(Math,indexesOfY) 
                     
                     if(diagonalStone !== undefined){  
                         const user1StonesId = state.user1.stones.map((obj)=>obj.id)
                        if( diagonalStone.positionY === minFalse ){
                            if(!user1StonesId.includes(diagonalStone.id)){
-                               state.eatableIndexes.push(diagonalStone.id)
+                                state.eatableIndexes.push(diagonalStone.id)
                            }
                        }
                    }
-                    if(rightTopfalseItems.length === 0){
+                    if(leftTopfalseItems.length === 0){
                         state.movableAreas.push(diagonalStone.id)
-                        if(state.eatableIndexes.length > 0){
+                        if(state.eatableIndexes.length > -1){
                             state.movableAreas.push(state.eatableIndexes)
+                        }
+                    }
+                    if(y !== 1){
+
+                        let diagonalStoneDownLeft = state.board.find((obj)=> obj.positionX === xAxis[i] && obj.positionY === y-counterDown )
+                        counterDown++
+                     
+                     if(diagonalStoneDownLeft!== undefined){
+                         console.log(current(diagonalStoneDownLeft))
+                         if(diagonalStoneDownLeft.isEmpty === false){
+                            leftBottomfalseItems.push(diagonalStoneDownLeft)
+                         }
+                    }
+
+                    
+                    leftBottomfalseItems = leftBottomfalseItems.filter((obj)=> obj !== undefined)
+                    let indexOfDownY = leftBottomfalseItems.map((obj)=> obj.positionY)
+                    minFalseDown = Math.max.apply(Math,indexOfDownY)
+
+
+                    if(diagonalStoneDownLeft !== undefined){
+                     const user1StonesId = state.user1.stones.map((obj)=> obj.id)
+                     if(diagonalStoneDownLeft.positionY === minFalseDown){
+                         if(!user1StonesId.includes(diagonalStoneDownLeft.id)){
+                             state.eatableIndexes.push(diagonalStoneDownLeft.id)
+                         }
+                     }
+                   }
+
+                     if(leftBottomfalseItems.length === 0){
+                         if(diagonalStoneDownLeft !== undefined){
+                             state.movableAreas.push(diagonalStoneDownLeft.id)
+                             if(state.eatableIndexes.length > -1){
+                                 state.movableAreas.push(state.eatableIndexes)
+                             }
+                         }
                         }
                     }
                 }
                 console.log(current(state.movableAreas))
-              
+              }
+            //*--------------------------------------------------
+
                  
                   
                 
