@@ -46,6 +46,7 @@ export const setBlackStones = ()=>{
                 name:"black-rook",
                 isActive: false,
                 isChekers: false,
+                counter:0,
                 src: "https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-rook.png?raw=true"
             });
             /* Knight*/ 
@@ -90,6 +91,7 @@ export const setBlackStones = ()=>{
                 name:"black-king",
                 isActive: false,
                 isChekers: false,
+                counter:0,
                 src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-king.png?raw=true"
             });
 
@@ -127,6 +129,7 @@ export const setWhiteStones = ()=>{
                     name:"white-rook",
                     isActive: false,
                     isChekers: false,
+                    counter:0,
                     src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-rook.png?raw=true"
                     
                 });
@@ -172,6 +175,7 @@ export const setWhiteStones = ()=>{
                     name:"white-king",
                     isActive: false,
                     isChekers: false,
+                    counter:0,
                     src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-king.png?raw=true"
                 });
     

@@ -1005,6 +1005,26 @@ const gameSlice = createSlice({
                 const xAxis = ["a","b","c","d","e","f","g","h"]
                 let indexOfX = xAxis.indexOf(x)
                 let moves=[]
+                if(state.selectedObj.counter === 0 && state.selectedObj.id === "e1"){
+                   let f1 = state.board.find((obj)=> obj.id==="f1")
+                   let g1 = state.board.find((obj)=> obj.id==="g1")
+                   let d1 = state.board.find((obj)=> obj.id==="d1")
+                   let c1 = state.board.find((obj)=> obj.id==="c1")
+                   let b1 = state.board.find((obj)=> obj.id==="b1")
+                   let h1 = state.board.find((obj)=> obj.id==="h1")
+                   let a1 = state.board.find((obj)=> obj.id==="a1")
+                   console.log(h1.stoneData.counter)
+                   console.log(a1.stoneData.counter)
+                   if(f1.isEmpty === true && g1.isEmpty===true && h1.stoneData.counter === 0){
+                    state.movableAreas.push(g1.id)
+                    state.movableAreas.push(h1.id)
+                   }
+                   if(d1.isEmpty === true && c1.isEmpty===true&& b1.isEmpty===true && a1.stoneData.counter === 0){
+                    state.movableAreas.push(a1.id)
+                    state.movableAreas.push(b1.id)
+                    state.movableAreas.push(c1.id)
+                }
+                }
                 if(y!== 8){
                     let upMove = state.board.find((obj)=> obj.positionX === x && obj.positionY === y+1)
                     if(upMove !== undefined){ moves.push(upMove.id)}
@@ -1922,6 +1942,28 @@ const gameSlice = createSlice({
             const xAxis = ["a","b","c","d","e","f","g","h"]
                 let indexOfX = xAxis.indexOf(x)
                 let moves=[]
+
+
+                if(state.selectedObj.counter === 0 && state.selectedObj.id==="e8"){
+                    let f8 = state.board.find((obj)=> obj.id==="f8")
+                    let g8 = state.board.find((obj)=> obj.id==="g8")
+                    let d8 = state.board.find((obj)=> obj.id==="d8")
+                    let c8 = state.board.find((obj)=> obj.id==="c8")
+                    let b8 = state.board.find((obj)=> obj.id==="b8")
+                    let h8 = state.board.find((obj)=> obj.id==="h8")
+                    let a8 = state.board.find((obj)=> obj.id==="a8")
+                    console.log(h8.stoneData.counter)
+                    console.log(a8.stoneData.counter)
+                    if(f8.isEmpty === true && g8.isEmpty===true && h8.stoneData.counter === 0){
+                     state.movableAreas.push(g8.id)
+                     state.movableAreas.push(h8.id)
+                    }
+                    if(d8.isEmpty === true && c8.isEmpty===true&& b8.isEmpty===true && a8.stoneData.counter === 0){
+                     state.movableAreas.push(a8.id)
+                     state.movableAreas.push(b8.id)
+                     state.movableAreas.push(c8.id)
+                    }
+                 }
                 if(y!== 8){
                     let upMove = state.board.find((obj)=> obj.positionX === x && obj.positionY === y+1)
                     if(upMove !== undefined){ moves.push(upMove.id)}
@@ -1985,7 +2027,11 @@ const gameSlice = createSlice({
           
             const ChangeArray = current(state.user1.stones).map((obj)=>{
                 if(obj.id === state.selectedObj.id){
-                    return {...obj, positionX:directionArray[0], positionY: Number(directionArray[1]) , id: state.direction}
+                    if(obj.name ==="white-rook" ||obj.name ==="white-king"){
+                        return {...obj, positionX:directionArray[0], positionY: Number(directionArray[1]) , id: state.direction,counter:1}
+                    }else{
+                        return {...obj, positionX:directionArray[0], positionY: Number(directionArray[1]) , id: state.direction}
+                    }
                 }
                 return obj
             })
@@ -2014,7 +2060,11 @@ const gameSlice = createSlice({
           
             const ChangeArray = current(state.user2.stones).map((obj)=>{
                 if(obj.id === state.selectedObj.id){
-                    return {...obj, positionX:directionArray[0], positionY: Number(directionArray[1]) , id: state.direction}
+                    if(obj.name=== "black-rook" || obj.name==="black-king"){
+                        return {...obj, positionX:directionArray[0], positionY: Number(directionArray[1]) , id: state.direction,counter:1}
+                    }else{
+                        return {...obj, positionX:directionArray[0], positionY: Number(directionArray[1]) , id: state.direction}
+                    }
                 }
                 return obj
             })
