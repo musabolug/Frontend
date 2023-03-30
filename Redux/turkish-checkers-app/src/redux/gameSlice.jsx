@@ -67,7 +67,7 @@ const gameSlice = createSlice({
         leftfalse:-1,
         rightfalse:8,
         renderEatableIndexes:[],
-        openPromote: true,
+        openPromote: false,
         promotionObj:{} ,
     },
     reducers:{
@@ -2034,28 +2034,171 @@ const gameSlice = createSlice({
             state.totalStones.length= 0
             state.totalStones.push(state.user2.stones.flat())
             state.totalStones.push(state.user1.stones.flat())
-            console.log(state.totalStones)
             state.board = configureStonesOnBoard(state.totalStones.flat())           
 
             
             }
-            if(state.selectedObj.name=== "white-pawn"){
+            if(state.selectedObj.name === "white-pawn"){
                 if(state.direction ==="a8" ||state.direction ==="b8" ||state.direction ==="c8" ||
                 state.direction ==="d8" ||state.direction ==="e8" ||state.direction ==="f8" ||
                 state.direction ==="h8"){
-                state.poromotePawnForm = true
+                state.openPromote = true
+                console.log(state.openPromote)
                 }
             }
             if(state.selectedObj.name=== "black-pawn"){
                   if(state.direction ==="a1" ||state.direction ==="b1" ||state.direction ==="c1" ||
                 state.direction ==="d1" ||state.direction ==="e1" ||state.direction ==="f1" ||
                 state.direction ==="h1"){
-                state.poromotePawnForm = true
+                state.openPromote = true
+                console.log(state.openPromote)
                 }
             }
         },
         poromotePawnForm:(state,action) =>{
        state.promotionObj = action.payload
+
+
+       state.openPromote = false
+       //*White Rook Selection
+       if(state.promotionObj === "white-rook"){
+           const ChangeArray = current(state.user1.stones).map((obj)=>{
+               if(obj.id === state.direction){
+                   return {...obj, name:"white-rook", src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-rook.png?raw=true"}
+                }
+                return obj
+            })
+            state.user1.stones.length= 0
+            state.user1.stones = ChangeArray.flatMap(obj=>obj)
+            state.totalStones.length= 0
+            state.totalStones.push(state.user1.stones)
+            state.totalStones.push(state.user2.stones)
+            console.log(state.totalStones)
+            state.board = configureStonesOnBoard(state.totalStones.flat())           
+            
+        }
+        //*White Bishop Selection
+        if(state.promotionObj === "white-bishop"){
+            const ChangeArray = current(state.user1.stones).map((obj)=>{
+                if(obj.id === state.direction){
+                    return {...obj, name:"white-bishop",src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-bishop.png?raw=true"
+                }
+                 }
+                 return obj
+             })
+             state.user1.stones.length= 0
+             state.user1.stones = ChangeArray.flatMap(obj=>obj)
+             state.totalStones.length= 0
+             state.totalStones.push(state.user1.stones)
+             state.totalStones.push(state.user2.stones)
+             console.log(state.totalStones)
+             state.board = configureStonesOnBoard(state.totalStones.flat())           
+             
+         }
+        //*White Knight Selection
+        if(state.promotionObj === "white-knight"){
+            const ChangeArray = current(state.user1.stones).map((obj)=>{
+                if(obj.id === state.direction){
+                    return {...obj, name:"white-knight", src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-knight.png?raw=true"
+                }
+                 }
+                 return obj
+             })
+             state.user1.stones.length= 0
+             state.user1.stones = ChangeArray.flatMap(obj=>obj)
+             state.totalStones.length= 0
+             state.totalStones.push(state.user1.stones)
+             state.totalStones.push(state.user2.stones)
+             console.log(state.totalStones)
+             state.board = configureStonesOnBoard(state.totalStones.flat())           
+             
+         }
+        //*White Queen Selection
+        if(state.promotionObj === "white-queen"){
+            const ChangeArray = current(state.user1.stones).map((obj)=>{
+                if(obj.id === state.direction){
+                    return {...obj, name:"white-queen", src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-queen.png?raw=true"
+                }
+                 }
+                 return obj
+             })
+             state.user1.stones.length= 0
+             state.user1.stones = ChangeArray.flatMap(obj=>obj)
+             state.totalStones.length= 0
+             state.totalStones.push(state.user1.stones)
+             state.totalStones.push(state.user2.stones)
+             console.log(state.totalStones)
+             state.board = configureStonesOnBoard(state.totalStones.flat())           
+             
+         }
+         //*Black Rook Selection
+    if (state.promotionObj ==="black-rook") {
+    const ChangeArray = current(state.user2.stones).map((obj)=>{
+        if(obj.id === state.direction){
+            return {...obj, name:"black-rook",src: "https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-rook.png?raw=true"
+        }
+    }
+    return obj
+})
+console.log(ChangeArray)
+    state.user2.stones.length= 0
+    state.user2.stones = ChangeArray.flatMap(obj=>obj)
+    state.totalStones.length= 0
+    state.totalStones.push(state.user2.stones.flat())
+    state.totalStones.push(state.user1.stones.flat())
+    state.board = configureStonesOnBoard(state.totalStones.flat())           
+    }
+         //*Black Bishop Selection
+    if (state.promotionObj ==="black-bishop") {
+    const ChangeArray = current(state.user2.stones).map((obj)=>{
+        if(obj.id === state.direction){
+            return {...obj, name:"black-bishop",src: "https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-bishop.png?raw=true"
+        }
+    }
+    return obj
+})
+console.log(ChangeArray)
+    state.user2.stones.length= 0
+    state.user2.stones = ChangeArray.flatMap(obj=>obj)
+    state.totalStones.length= 0
+    state.totalStones.push(state.user2.stones.flat())
+    state.totalStones.push(state.user1.stones.flat())
+    state.board = configureStonesOnBoard(state.totalStones.flat())           
+    }
+         //*Black Knight Selection
+    if (state.promotionObj ==="black-knight") {
+    const ChangeArray = current(state.user2.stones).map((obj)=>{
+        if(obj.id === state.direction){
+            return {...obj, name:"black-knight",  src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-knight,.png?raw=true"
+        }
+    }
+    return obj
+})
+console.log(ChangeArray)
+    state.user2.stones.length= 0
+    state.user2.stones = ChangeArray.flatMap(obj=>obj)
+    state.totalStones.length= 0
+    state.totalStones.push(state.user2.stones.flat())
+    state.totalStones.push(state.user1.stones.flat())
+    state.board = configureStonesOnBoard(state.totalStones.flat())           
+    }
+         //*Black Queen Selection
+    if (state.promotionObj ==="black-queen") {
+    const ChangeArray = current(state.user2.stones).map((obj)=>{
+        if(obj.id === state.direction){
+            return {...obj, name:"black-queen",src: "https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-queen.png?raw=true"
+        }
+    }
+    return obj
+})
+console.log(ChangeArray)
+    state.user2.stones.length= 0
+    state.user2.stones = ChangeArray.flatMap(obj=>obj)
+    state.totalStones.length= 0
+    state.totalStones.push(state.user2.stones.flat())
+    state.totalStones.push(state.user1.stones.flat())
+    state.board = configureStonesOnBoard(state.totalStones.flat())           
+    }
        
         },
         setPlayer:(state,action)=>{
@@ -2068,5 +2211,5 @@ const gameSlice = createSlice({
     },
 })
 
-export const {startGame,closeResult,openResult,moveStone,setShowUserForm,resetGame,selectStone,setPlayer} = gameSlice.actions
+export const {startGame,closeResult,openResult,moveStone,setShowUserForm,resetGame,selectStone,setPlayer,poromotePawnForm} = gameSlice.actions
 export default gameSlice.reducer
