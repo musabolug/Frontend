@@ -115,7 +115,7 @@ const gameSlice = createSlice({
         state.gameStatus=""
         state.showModal= false
         state.player="white"
-        state. selectedStone= ""
+        state.selectedStone=""
         state.rivalStones=""
         state.whiteStones=[]
         state.blackStones=[]
@@ -515,7 +515,6 @@ const gameSlice = createSlice({
                 let minFalse = y+1
                 let minFalseDown = y
 
-                let maxVal = 8
                    for(let i = horizentalIndex; i < 8; i++){
                     //*TOP
                     if(y !== 8){ 
@@ -2021,6 +2020,53 @@ const gameSlice = createSlice({
             const directionArray = state.direction.split("")
             console.log(directionArray)
             if(state.player==="white"){
+                  //* Castling (ROK) for White King
+                if(state.selectedObj.name ==="white-king" && (state.direction==="g1" || state.direction==="h1"||state.direction==="c1"||state.direction==="b1"||state.direction==="a1")){
+                    if(state.direction==="g1"||state.direction==="h1"){
+                            let rightRook = state.board.find((obj)=>obj.id === "h1")
+                            state.selectedObj = {...state.selectedObj, positionX:"g", positionY:1}
+                            rightRook = {...rightRook, positionX:"f", positionY:1}
+                            const ChangeArray = current(state.user1.stones).map((obj)=>{
+                                if(obj.id === state.selectedObj.id){
+                                        return {...obj, positionX:"g", positionY:1 , id:"g1",counter:1}
+                                }if(obj.id === rightRook.id){
+                                    return {...obj,  positionX:"f",  positionY:1 , id: "f1"}
+                                }
+                                return obj
+                            })
+                            state.user1.stones.length= 0
+                            state.user1.stones = ChangeArray.flatMap(obj=>obj)
+                            state.totalStones.length= 0
+                            state.totalStones.push(state.user1.stones)
+                            state.totalStones.push(state.user2.stones)
+                            console.log(state.totalStones)
+                            state.board = configureStonesOnBoard(state.totalStones.flat())
+                    }
+                    if(state.direction==="c1"||state.direction==="b1"||state.direction==="a1"){
+                        let leftRook = state.board.find((obj)=>obj.id === "a1")
+                        state.selectedObj = {...state.selectedObj, positionX:"c", positionY:1}
+                        leftRook = {...leftRook, positionX:"f", positionY:1}
+                        const ChangeArray = current(state.user1.stones).map((obj)=>{
+                            if(obj.id === state.selectedObj.id){
+                                    return {...obj, positionX:"c", positionY:1 , id:"c1", counter:1}
+                            }if(obj.id === leftRook.id){
+                                return {...obj,  positionX:"d",  positionY:1 , id: "d1"}
+                            }
+                            return obj
+                        })
+                        state.user1.stones.length= 0
+                        state.user1.stones = ChangeArray.flatMap(obj=>obj)
+                        state.totalStones.length= 0
+                        state.totalStones.push(state.user1.stones)
+                        state.totalStones.push(state.user2.stones)
+                        console.log(state.totalStones)
+                        state.board = configureStonesOnBoard(state.totalStones.flat())
+                    }
+                  
+                }
+                //*--------------------------------------------------------------
+                else{
+
                 state.selectedObj = {...state.selectedObj, positionX:directionArray[0], positionY: directionArray[1]}
                 console.log(state.selectedObj)
              console.log("ChangeObjectinArray",current(state.user1.stones).find((obj)=>obj.id === state.selectedObj.id) )
@@ -2053,8 +2099,54 @@ const gameSlice = createSlice({
             console.log(state.totalStones)
             state.board = configureStonesOnBoard(state.totalStones.flat())           
 
-            }
+        } }
             if (state.player==="black") {
+                //* Castling (ROK) for Black King
+                if(state.selectedObj.name ==="black-king" && (state.direction==="g8" || state.direction==="h8"||state.direction==="c8"||state.direction==="b8"||state.direction==="a8")){
+                    if(state.direction==="g8"||state.direction==="h8"){
+                            let rightRook = state.board.find((obj)=>obj.id === "h8")
+                            state.selectedObj = {...state.selectedObj, positionX:"g", positionY:8}
+                            rightRook = {...rightRook, positionX:"f", positionY:8}
+                            const ChangeArray = current(state.user2.stones).map((obj)=>{
+                                if(obj.id === state.selectedObj.id){
+                                        return {...obj, positionX:"g", positionY:8 , id:"g8",counter:1}
+                                }if(obj.id === rightRook.id){
+                                    return {...obj,  positionX:"f",  positionY:8 , id: "f1"}
+                                }
+                                return obj
+                            })
+                            state.user2.stones.length= 0
+                            state.user2.stones = ChangeArray.flatMap(obj=>obj)
+                            state.totalStones.length= 0
+                            state.totalStones.push(state.user2.stones)
+                            state.totalStones.push(state.user1.stones)
+                            console.log(state.totalStones)
+                            state.board = configureStonesOnBoard(state.totalStones.flat())
+                    }
+                    if(state.direction==="c8"||state.direction==="b8"||state.direction==="a8"){
+                        let leftRook = state.board.find((obj)=>obj.id === "a8")
+                        state.selectedObj = {...state.selectedObj, positionX:"c", positionY:8}
+                        leftRook = {...leftRook, positionX:"f", positionY:8}
+                        const ChangeArray = current(state.user2.stones).map((obj)=>{
+                            if(obj.id === state.selectedObj.id){
+                                    return {...obj, positionX:"c", positionY:8 , id:"c8", counter:1}
+                            }if(obj.id === leftRook.id){
+                                return {...obj,  positionX:"d",  positionY:8 , id: "d8"}
+                            }
+                            return obj
+                        })
+                        state.user2.stones.length= 0
+                        state.user2.stones = ChangeArray.flatMap(obj=>obj)
+                        state.totalStones.length= 0
+                        state.totalStones.push(state.user2.stones)
+                        state.totalStones.push(state.user1.stones)
+                        console.log(state.totalStones)
+                        state.board = configureStonesOnBoard(state.totalStones.flat())
+                    }
+                  
+                }
+                //*--------------------------------------------------------------
+                else{
                 state.selectedObj = {...state.selectedObj, positionX:directionArray[0], positionY: directionArray[1]}
                 console.log(state.selectedObj)
           
@@ -2087,7 +2179,7 @@ const gameSlice = createSlice({
             state.board = configureStonesOnBoard(state.totalStones.flat())           
 
             
-            }
+        } }
             if(state.selectedObj.name === "white-pawn"){
                 if(state.direction ==="a8" ||state.direction ==="b8" ||state.direction ==="c8" ||
                 state.direction ==="d8" ||state.direction ==="e8" ||state.direction ==="f8" ||
@@ -2114,7 +2206,7 @@ const gameSlice = createSlice({
        if(state.promotionObj === "white-rook"){
            const ChangeArray = current(state.user1.stones).map((obj)=>{
                if(obj.id === state.direction){
-                   return {...obj, name:"white-rook", src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-rook.png?raw=true"}
+                   return {...obj, name:"white-rook", src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/white-rook.png?raw=true"}
                 }
                 return obj
             })
@@ -2131,7 +2223,7 @@ const gameSlice = createSlice({
         if(state.promotionObj === "white-bishop"){
             const ChangeArray = current(state.user1.stones).map((obj)=>{
                 if(obj.id === state.direction){
-                    return {...obj, name:"white-bishop",src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-bishop.png?raw=true"
+                    return {...obj, name:"white-bishop",src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/white-bishop.png?raw=true"
                 }
                  }
                  return obj
@@ -2149,7 +2241,7 @@ const gameSlice = createSlice({
         if(state.promotionObj === "white-knight"){
             const ChangeArray = current(state.user1.stones).map((obj)=>{
                 if(obj.id === state.direction){
-                    return {...obj, name:"white-knight", src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-knight.png?raw=true"
+                    return {...obj, name:"white-knight", src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/white-knight.png?raw=true"
                 }
                  }
                  return obj
@@ -2167,7 +2259,7 @@ const gameSlice = createSlice({
         if(state.promotionObj === "white-queen"){
             const ChangeArray = current(state.user1.stones).map((obj)=>{
                 if(obj.id === state.direction){
-                    return {...obj, name:"white-queen", src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-queen.png?raw=true"
+                    return {...obj, name:"white-queen", src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/white-queen.png?raw=true"
                 }
                  }
                  return obj
@@ -2185,7 +2277,7 @@ const gameSlice = createSlice({
     if (state.promotionObj ==="black-rook") {
     const ChangeArray = current(state.user2.stones).map((obj)=>{
         if(obj.id === state.direction){
-            return {...obj, name:"black-rook",src: "https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-rook.png?raw=true"
+            return {...obj, name:"black-rook",src: "https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/black-rook.png?raw=true"
         }
     }
     return obj
@@ -2202,7 +2294,7 @@ console.log(ChangeArray)
     if (state.promotionObj ==="black-bishop") {
     const ChangeArray = current(state.user2.stones).map((obj)=>{
         if(obj.id === state.direction){
-            return {...obj, name:"black-bishop",src: "https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-bishop.png?raw=true"
+            return {...obj, name:"black-bishop",src: "https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/black-bishop.png?raw=true"
         }
     }
     return obj
@@ -2219,7 +2311,7 @@ console.log(ChangeArray)
     if (state.promotionObj ==="black-knight") {
     const ChangeArray = current(state.user2.stones).map((obj)=>{
         if(obj.id === state.direction){
-            return {...obj, name:"black-knight",  src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-knight,.png?raw=true"
+            return {...obj, name:"black-knight",  src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/black-knight,.png?raw=true"
         }
     }
     return obj
@@ -2236,7 +2328,7 @@ console.log(ChangeArray)
     if (state.promotionObj ==="black-queen") {
     const ChangeArray = current(state.user2.stones).map((obj)=>{
         if(obj.id === state.direction){
-            return {...obj, name:"black-queen",src: "https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-queen.png?raw=true"
+            return {...obj, name:"black-queen",src: "https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/black-queen.png?raw=true"
         }
     }
     return obj
