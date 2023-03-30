@@ -31,7 +31,7 @@ export const setBlackStones = ()=>{
                 name:"black-pawn",
                 isActive: false,
                 isChekers: false,
-                src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-pawn.png?raw=true"
+                src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/black-pawn.png?raw=true"
             });
         }
     }
@@ -47,7 +47,7 @@ export const setBlackStones = ()=>{
                 isActive: false,
                 isChekers: false,
                 counter:0,
-                src: "https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-rook.png?raw=true"
+                src: "https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/black-rook.png?raw=true"
             });
             /* Knight*/ 
             if(i === 1 || i === 6)
@@ -58,7 +58,7 @@ export const setBlackStones = ()=>{
                 name:"black-knight",
                 isActive: false,
                 isChekers: false,
-                src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-knight,.png?raw=true"
+                src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/black-knight,.png?raw=true"
             });
             /* Bishop*/ 
             if(i === 2 || i === 5)
@@ -69,7 +69,7 @@ export const setBlackStones = ()=>{
                 name:"black-bishop",
                 isActive: false,
                 isChekers: false,
-                src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-bishop.png?raw=true"
+                src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/black-bishop.png?raw=true"
             });
             /* Queen*/ 
             if(i === 3)
@@ -80,7 +80,7 @@ export const setBlackStones = ()=>{
                 name:"black-queen",
                 isActive: false,
                 isChekers: false,
-                src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-queen.png?raw=true"
+                src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/black-queen.png?raw=true"
             });
             /* King*/ 
             if(i === 4)
@@ -92,7 +92,7 @@ export const setBlackStones = ()=>{
                 isActive: false,
                 isChekers: false,
                 counter:0,
-                src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/black-king.png?raw=true"
+                src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/black-king.png?raw=true"
             });
 
         }
@@ -114,7 +114,7 @@ export const setWhiteStones = ()=>{
                 name:"white-pawn",
                 isActive: false,
                 isChekers: false,
-                src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-pawn.png?raw=true"
+                src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/white-pawn.png?raw=true"
             });
         }
     }
@@ -130,7 +130,7 @@ export const setWhiteStones = ()=>{
                     isActive: false,
                     isChekers: false,
                     counter:0,
-                    src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-rook.png?raw=true"
+                    src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/white-rook.png?raw=true"
                     
                 });
                 /* Knight*/ 
@@ -142,7 +142,7 @@ export const setWhiteStones = ()=>{
                     name:"white-knight",
                     isActive: false,
                     isChekers: false,
-                    src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-knight.png?raw=true"
+                    src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/white-knight.png?raw=true"
                 });
                 /* Bishop*/ 
                 if(i === 2 || i === 5)
@@ -153,7 +153,7 @@ export const setWhiteStones = ()=>{
                     name:"white-bishop",
                     isActive: false,
                     isChekers: false,
-                    src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-bishop.png?raw=true"
+                    src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/white-bishop.png?raw=true"
                 });
                 /* Queen*/ 
                 if(i === 3)
@@ -164,7 +164,7 @@ export const setWhiteStones = ()=>{
                     name:"white-queen",
                     isActive: false,
                     isChekers: false,
-                    src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-queen.png?raw=true"
+                    src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/white-queen.png?raw=true"
                 });
                 /* King*/ 
                 if(i === 4)
@@ -176,7 +176,7 @@ export const setWhiteStones = ()=>{
                     isActive: false,
                     isChekers: false,
                     counter:0,
-                    src:"https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/white-king.png?raw=true"
+                    src:"https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/white-king.png?raw=true"
                 });
     
             }
