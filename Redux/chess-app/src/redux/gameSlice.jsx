@@ -69,6 +69,7 @@ const gameSlice = createSlice({
         renderEatableIndexes:[],
         openPromote: false,
         promotionObj:{} ,
+        winner:"Musab",
     },
     reducers:{
         openResult: (state) =>{
@@ -76,6 +77,39 @@ const gameSlice = createSlice({
         },
         closeResult: (state) =>{
             state.showModal = false
+            state.gameStatus= "";
+            state.user1.stones = setWhiteStones().flat()
+            state.user2.stones = setBlackStones().flat()
+            state.board = configureBoard()
+            state.user1={
+            id:1,
+            name: "",
+            totalStones: 16,
+            color: "white",
+            stones:[]
+        }
+        state.user2={
+            id:2,
+            name: "",
+            totalStones: 16,
+            color: "black",
+            stones:[]
+        }
+        state.gameStatus=""
+        state.showModal= false
+        state.player="white"
+        state.selectedStone=""
+        state.rivalStones=""
+        state.whiteStones=[]
+        state.blackStones=[]
+        state.movable= false
+        state.theme="light"
+        state.showUserForm= false
+        state.movableAreas=[]
+        state.direction=""
+        state.selectedObj={} 
+        state.totalStones=[]
+        state.winner=""
         },
         startGame:(state, action)=>{
             const {user1, user2} = action.payload;
@@ -126,6 +160,7 @@ const gameSlice = createSlice({
         state.direction=""
         state.selectedObj={} 
         state.totalStones=[]
+        state.winner=""
         
         },
      
@@ -174,6 +209,7 @@ const gameSlice = createSlice({
                             state.eatableIndexes.push(`c${y+1}`)
                             console.log("eatable",current(state.eatableIndexes))
                         }
+                       
                      
                     }
                     else if(x === "c"){
@@ -2069,23 +2105,40 @@ const gameSlice = createSlice({
 
                 state.selectedObj = {...state.selectedObj, positionX:directionArray[0], positionY: directionArray[1]}
                 console.log(state.selectedObj)
-             console.log("ChangeObjectinArray",current(state.user1.stones).find((obj)=>obj.id === state.selectedObj.id) )
-          
+                if(state.user1.stones.find((obj)=>obj.src==="")){
+                    state.user1.stones.pop()
+                }
             const ChangeArray = current(state.user1.stones).map((obj)=>{
                 if(obj.id === state.selectedObj.id){
                     if(obj.name ==="white-rook" ||obj.name ==="white-king"){
                         return {...obj, positionX:directionArray[0], positionY: Number(directionArray[1]) , id: state.direction,counter:1}
-                    }else{
+                    }
+                    else{
                         return {...obj, positionX:directionArray[0], positionY: Number(directionArray[1]) , id: state.direction}
                     }
                 }
                 return obj
             })
+            let enPassant ={id: `${directionArray[0]}3`, positionX:directionArray[0], positionY: 3 ,isActive:false,isCheckers:false,name:"white-pawn",src:"", }
+            console.log(enPassant)
+            console.log(state.selectedObj)
+            if(state.selectedObj.name==="white-pawn" && state.selectedObj.positionY ==="4"&& state.selectedObj.id===`${directionArray[0]}2`){
+                
+                ChangeArray.push(enPassant)
+            }
+            console.log("ChangeArray",ChangeArray.map(obj=> obj))
             if(state.user2.stones.find((obj)=> obj.id === state.direction)){
                 const eatenStone = state.user2.stones.find((obj)=> obj.id === state.direction)
                 state.eatenStones.push(eatenStone)
                 const index = state.user2.stones.indexOf(eatenStone)
                 if(index>-1){
+                    if(eatenStone.name ==="black-pawn" && eatenStone.src===""){ //*En Passant
+                        let enPassant = state.user2.stones.find((obj)=>obj.positionX=== eatenStone.positionX && obj.positionY === Number(eatenStone.positionY-1))
+                        const enPassantIndex = state.user2.stones.indexOf(enPassant)
+                        state.eatenStones.splice(state.eatenStones.indexOf(eatenStone),1)
+                        state.eatenStones.push(enPassant)
+                        state.user2.stones.splice(enPassantIndex,1)
+                    }
                     state.user2.stones.splice(index,1);
                 }
                 console.log("eatenStone",state.user2.stones)
@@ -2093,12 +2146,14 @@ const gameSlice = createSlice({
             }
             state.user1.stones.length= 0
             state.user1.stones = ChangeArray.flatMap(obj=>obj)
+            console.log(state.user1.stones)
             state.totalStones.length= 0
             state.totalStones.push(state.user1.stones)
             state.totalStones.push(state.user2.stones)
             console.log(state.totalStones)
-            state.board = configureStonesOnBoard(state.totalStones.flat())           
-
+            state.board = configureStonesOnBoard(state.totalStones.flat())    
+            ChangeArray.pop()       
+            
         } }
             if (state.player==="black") {
                 //* Castling (ROK) for Black King
@@ -2145,11 +2200,13 @@ const gameSlice = createSlice({
                     }
                   
                 }
-                //*--------------------------------------------------------------
+             //*--------------------------------------------------------------
                 else{
                 state.selectedObj = {...state.selectedObj, positionX:directionArray[0], positionY: directionArray[1]}
                 console.log(state.selectedObj)
-          
+                if(state.user2.stones.find((obj)=>obj.src==="")){
+                    state.user2.stones.pop()
+                }
             const ChangeArray = current(state.user2.stones).map((obj)=>{
                 if(obj.id === state.selectedObj.id){
                     if(obj.name=== "black-rook" || obj.name==="black-king"){
@@ -2160,15 +2217,29 @@ const gameSlice = createSlice({
                 }
                 return obj
             })
-
+            let enPassant ={id: `${directionArray[0]}6`, positionX:directionArray[0], positionY: 6 ,isActive:false,isCheckers:false,name:"black-pawn",src:"" }
+            console.log(enPassant)
+            console.log(state.selectedObj)
+            if(state.selectedObj.name==="black-pawn" && state.selectedObj.positionY ==="5"&& state.selectedObj.id===`${directionArray[0]}7`){
+                
+                ChangeArray.push(enPassant)
+            }
             if(state.user1.stones.find((obj)=> obj.id === state.direction)){
                 const eatenStone = state.user1.stones.find((obj)=> obj.id === state.direction)
                 state.eatenStones.push(eatenStone)
                 const index = state.user1.stones.indexOf(eatenStone)
                 if(index>-1){
+                    if(eatenStone.name ==="white-pawn" && eatenStone.src===""){
+                        //*En Passant
+                        let enPassant = state.user1.stones.find((obj)=>obj.positionX=== eatenStone.positionX && obj.positionY === Number(eatenStone.positionY+1))
+                        const enPassantIndex = state.user1.stones.indexOf(enPassant)
+                        state.eatenStones.splice(state.eatenStones.indexOf(eatenStone),1)
+                        state.eatenStones.push(enPassant)
+                        state.user1.stones.splice(enPassantIndex,1)
+                    }
                     state.user1.stones.splice(index,1);
                 }
-                console.log("eatenStone",state.user1.stones)
+                console.log("eatenStone",eatenStone)
                 console.log("eatenStones",current(state.eatenStones))
             }
             state.user2.stones.length= 0
@@ -2177,14 +2248,27 @@ const gameSlice = createSlice({
             state.totalStones.push(state.user2.stones.flat())
             state.totalStones.push(state.user1.stones.flat())
             state.board = configureStonesOnBoard(state.totalStones.flat())           
-
-            
+        
         } }
+        if(state.eatenStones.find((obj) => obj.name ==="white-king")){
+            state.winner= state.user2.name
+            state.showModal = true
+            console.log("winner",state.winner)
+            console.log(state.showModal)
+        }
+        else if(state.eatenStones.find((obj)=> obj.name ==="black-king")){
+            state.winner= state.user1.name
+            state.showModal = true
+            console.log("winner",state.winner)
+            console.log(state.showModal)
+        }
             if(state.selectedObj.name === "white-pawn"){
                 if(state.direction ==="a8" ||state.direction ==="b8" ||state.direction ==="c8" ||
                 state.direction ==="d8" ||state.direction ==="e8" ||state.direction ==="f8" ||
                 state.direction ==="h8"){
-                state.openPromote = true
+                    if(state.showModal=== false){
+                        state.openPromote = true
+                    }
                 console.log(state.openPromote)
                 }
             }
@@ -2192,10 +2276,12 @@ const gameSlice = createSlice({
                   if(state.direction ==="a1" ||state.direction ==="b1" ||state.direction ==="c1" ||
                 state.direction ==="d1" ||state.direction ==="e1" ||state.direction ==="f1" ||
                 state.direction ==="h1"){
-                state.openPromote = true
-                console.log(state.openPromote)
+                    if(state.showModal=== false){
+                        state.openPromote = true
+                    }
                 }
             }
+         
         },
         poromotePawnForm:(state,action) =>{
        state.promotionObj = action.payload

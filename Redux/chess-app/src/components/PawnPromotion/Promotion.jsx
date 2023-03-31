@@ -18,10 +18,10 @@ function Promotion() {
                 <form action="" >
                     
                         
-                    <img onClick={(e)=> handleClick(e)} className='white-bishop' src="https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/Wbishop.png?raw=true" alt=""  />
-                   <img onClick={(e)=> handleClick(e)} className='white-knight' src="https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/Wknight.png?raw=true" alt="" />
-                   <img onClick={(e)=> handleClick(e)}className='white-rook'src="https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/Wrook.png?raw=true" alt="" />
-                   <img onClick={(e)=> handleClick(e)}className='white-queen'src="https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/Wqueen.png?raw=true" alt="" />
+                    <img onClick={(e)=> handleClick(e)} className='white-bishop' src="https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/Wbishop.png?raw=true" alt=""  />
+                   <img onClick={(e)=> handleClick(e)} className='white-knight' src="https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/Wknight.png?raw=true" alt="" />
+                   <img onClick={(e)=> handleClick(e)}className='white-rook'src="https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/Wrook.png?raw=true" alt="" />
+                   <img onClick={(e)=> handleClick(e)}className='white-queen'src="https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/Wqueen.png?raw=true" alt="" />
                    
                 </form>
                 :""
@@ -29,10 +29,10 @@ function Promotion() {
           {
                 player === "white" ?
                 <form action="">
-                   <img onClick={(e)=> handleClick(e)}className='black-bishop' src="https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/Bbishop.png?raw=true" alt="" />
-                   <img onClick={(e)=> handleClick(e)}className='black-knight' src="https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/Bknight.png?raw=true" alt="" />
-                   <img onClick={(e)=> handleClick(e)}className='black-rook'src="https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/Brook.png?raw=true" alt="" />
-                   <img onClick={(e)=> handleClick(e)}className='black-queen'src="https://github.com/musabolug/Frontend/blob/master/Redux/turkish-checkers-app/src/assets/Bqueen.png?raw=true" alt="" />
+                   <img onClick={(e)=> handleClick(e)}className='black-bishop' src="https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/Bbishop.png?raw=true" alt="" />
+                   <img onClick={(e)=> handleClick(e)}className='black-knight' src="https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/Bknight.png?raw=true" alt="" />
+                   <img onClick={(e)=> handleClick(e)}className='black-rook'src="https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/Brook.png?raw=true" alt="" />
+                   <img onClick={(e)=> handleClick(e)}className='black-queen'src="https://github.com/musabolug/Frontend/blob/master/Redux/chess-app/src/assets/Bqueen.png?raw=true" alt="" />
             </form>
             :""
             }
