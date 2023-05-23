@@ -33,3 +33,43 @@ svg{
 .logo{
     margin-left: 40px;
 }
+.main{
+    display: flex;
+    margin-top: 80px;
+    margin-left: 100px;
+    margin-right: 100px;
+
+}
+
+form p{
+
+    margin: 0;
+    display: flex;
+    
+}
+form .input-text{
+
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #E3F2C1;
+    margin-bottom: 15px;
+    padding: 4px;
+    padding-left: 10px;
+    
+}
+form .input-text:focus{
+
+    outline: 10px;
+    border-color: #85B09B;;
+    
+}
+
+.input-selection{
+   height: 15px;
+   width: 15px;
+}
+form span{
+    font-size: 18px;
+}
