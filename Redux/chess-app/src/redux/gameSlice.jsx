@@ -110,6 +110,7 @@ const gameSlice = createSlice({
         state.selectedObj={} 
         state.totalStones=[]
         state.winner=""
+        state.eatenStones=[]
         },
         startGame:(state, action)=>{
             const {user1, user2} = action.payload;
@@ -2419,7 +2420,9 @@ console.log(ChangeArray)
     }
     return obj
 })
+
 console.log(ChangeArray)
+
     state.user2.stones.length= 0
     state.user2.stones = ChangeArray.flatMap(obj=>obj)
     state.totalStones.length= 0

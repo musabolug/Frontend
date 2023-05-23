@@ -7,7 +7,7 @@ function App() {
   return (
     <>
     <nav>
-      <NavLink to="/"></NavLink>
+      <NavLink to="/"><img src="" alt="" /></NavLink>
       <NavLink to="/about">BMI Nedir?</NavLink>
       <NavLink to="/diet-list">Diyet Listesi</NavLink>
     </nav>
