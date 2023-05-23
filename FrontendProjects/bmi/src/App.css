@@ -1,12 +1,35 @@
 
+.body{
+    background-color: #F6FFDE;
+    height: 100vh;
+}
 nav{
+   
     display: flex;
     justify-content: space-between;
     padding-inline: 1rem;
-   background-color: #98EECC ;
+  
+   background-color: #E3F2C1 ;
 }
-.logo {
+.Nav{
+    margin-right: 30px;
+    height: 100%;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.NavLink{
+    font-size:28px;
+    color: #85B09B;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 20px;
+}
+svg{
     
     width: 100px;
     height: 100%;
+}
+.logo{
+    margin-left: 40px;
 }
