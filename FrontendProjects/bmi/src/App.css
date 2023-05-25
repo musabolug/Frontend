@@ -1,7 +1,8 @@
 
 .body{
     background-color: #F6FFDE;
-    height: 100vh;
+    min-height: 100vh;
+    
 }
 nav{
    
@@ -35,7 +36,7 @@ svg{
 }
 .main{
     display: flex;
-    margin-top: 80px;
+    margin-top: 60px;
     place-content: center;
     
 }
@@ -79,9 +80,54 @@ form span{
 }
 
 .About{
-    display: flex;
+    
+    background-color: #F6FFDE;
+    place-content: center;
     margin-top: 40px;
     margin-left: 70px;
     margin-right: 70px;
     color: #85B09B;
+}
+.imgA{
+
+    width: 500px;
+}
+.About .span1{
+    background-color: #85B09B;
+    display: inline-flex;
+    padding-left: 20px;
+    font-size: 20px;
+    width: 600px;
+}
+
+.About .span2{
+    display: inline-flex;
+    padding-left: 20px;
+    font-size: 20px;
+    width: 600px;
+}
+.About .header{
+    display: block;
+}
+.image{
+    display: inline-flex;
+    height: 270px;
+}
+.text{
+    display: flex;
+    margin-top: 10px;
+}
+p{
+    font-size: 20px;
+}
+.BMI{
+    display: inline-block;
+    margin-top: 20px;
+    color: #85B09B;
+    justify-content: center;
+    text-align: center;
+}
+.TEXT{
+    display: flex;
+    justify-content: center;
 }
