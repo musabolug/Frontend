@@ -2,8 +2,9 @@ import React from 'react'
 
 function About() {
   return (
-    <div>
-        What is BMI
+    <div className='About'>
+        <h2>What is the body mass index (BMI)?</h2>
+        
     </div>
   )
 }
