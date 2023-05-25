@@ -16,7 +16,7 @@ function Main() {
             <span>Female</span>
             <br />
             </div>
-            <Button style={{backgroundColor:"#85B09B" , border:"none", width:"300px" ,marginTop:"15px"}} >Calculate</Button>
+            <Button style={{backgroundColor:"#85B09B" , border:"none", width:"400px" ,marginTop:"15px", height:"50px", fontSize:"1.5rem"}} >Calculate</Button>
         </form>
     </div>
   )

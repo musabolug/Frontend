@@ -36,21 +36,25 @@ svg{
 .main{
     display: flex;
     margin-top: 80px;
-    margin-left: 100px;
-    margin-right: 100px;
-
+    place-content: center;
+    
 }
-
+.img{
+    height: 100%;
+    width: 600px;
+}
+form{
+  margin-top: 100px;
+}
 form p{
-
     margin: 0;
     display: flex;
     
 }
 form .input-text{
 
-    width: 300px;
-    height: 30px;
+    width:400px;
+    height: 50px;
     border-radius: 5px;
     border: none;
     background-color: #E3F2C1;
@@ -72,4 +76,12 @@ form .input-text:focus{
 }
 form span{
     font-size: 18px;
+}
+
+.About{
+    display: flex;
+    margin-top: 40px;
+    margin-left: 70px;
+    margin-right: 70px;
+    color: #85B09B;
 }
