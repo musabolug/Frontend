@@ -1,8 +1,9 @@
 import React from 'react'
 import { Container, Col, Row, Nav ,Tab} from 'react-bootstrap';
-import projImg1 from "../assets/img/project-img1.png"
-import projImg2 from "../assets/img/project-img2.png"
-import projImg3 from "../assets/img/project-img3.png"
+import ChessAppKapak from "../assets/img/ChessAppKapak.jpg"
+import quote from "../assets/img/Quote.jpg"
+import noteApp from  "../assets/img/note-app.jpg"
+import typespeed from "../assets/img/type-speed.jpg"
 import colorSharp2 from "../assets/img/color-sharp2.png"
 import { ProjectCard } from './ProjectsCard';
 import "animate.css"
@@ -11,34 +12,40 @@ import TrackVisibility from 'react-on-screen'
 export  function Projects() {
     const projects = [
         {
-          title: "Business Startup",
+          title: "Chess Game App",
           description: "Design & Development",
-          imgUrl: projImg1,
+          imgUrl: ChessAppKapak,
+          projectUrl:"https://musabolug-chess-app.netlify.app"
         },
         {
-          title: "Business Startup",
+          title: "Quote Generator",
           description: "Design & Development",
-          imgUrl: projImg2,
+          imgUrl: quote,
+          projectUrl:"https://musabolug-quote-generator-app.netlify.app"
         },
         {
-          title: "Business Startup",
+          title: "Note App",
           description: "Design & Development",
-          imgUrl: projImg3,
+          imgUrl: noteApp,
+          projectUrl:"https://musabolug-note-app.netlify.app"
         },
         {
-          title: "Business Startup",
+          title: "Typespeed App",
           description: "Design & Development",
-          imgUrl: projImg1,
+          imgUrl: typespeed,
+          projectUrl:"https://musabolug-typespeed-app.netlify.app"
         },
         {
-          title: "Business Startup",
+          title: "Note App",
           description: "Design & Development",
-          imgUrl: projImg2,
+          imgUrl: noteApp,
+          projectUrl:"https://musabolug-note-app.netlify.app"
         },
         {
-          title: "Business Startup",
+          title: "Quote Generator",
           description: "Design & Development",
-          imgUrl: projImg3,
+          imgUrl: quote,
+          projectUrl:"https://musabolug-quote-generator-app.netlify.app"
         },
       ];
   return (

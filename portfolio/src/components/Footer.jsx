@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container,Row,Col } from 'react-bootstrap'
-import logo from "../assets/img/logo.svg"
+import logo from '../assets/img/musabolug-logo.png';
 import navIcon1 from '../assets/img/nav-icon1.svg';
 import navIcon2 from '../assets/img/nav-icon2.svg';
 import navIcon3 from '../assets/img/nav-icon3.svg';
@@ -13,7 +13,9 @@ function Footer() {
             <Row className="align-item-center">
               
                 <Col sm={6} >
-                    <img src={logo} alt="" />
+                    <a href="https://bio.link/musabolug">
+                    <img src={logo} alt=""  style={{width:"300px"}}  />
+                    </a>
 
                 </Col>
                 <Col sm={6} className='text-center text-sm-end'>

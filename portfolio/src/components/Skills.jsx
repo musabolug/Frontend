@@ -37,19 +37,43 @@ export const Skills= ()=>{
                         <h2>
                             Skills
                         </h2>
-                        <p>Lorem ipsum dolor sit amet consectetur. <br /><br /> Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                        <p>You can look at  some of my skills on this part</p>
                         <Carousel responsive={responsive} infinite={true} className="skill-slider">
                             <div className="item">
                                 <img src={meter1} alt="" />
-                                <h5>Web Development</h5>
+                                <h5>Javascrpit</h5>
                             </div>
                             <div className="item">
-                                <img src={meter2} alt="" />
-                                <h5>Brand <br /> Identify</h5>
+                                <img src={meter1} alt="" />
+                                <h5>React</h5>
                             </div>
                             <div className="item">
                                 <img src={meter3} alt="" />
-                                <h5>Logo <br /> design</h5>
+                                <h5>Redux</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter3} alt="" />
+                                <h5>MongoDb</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter3} alt="" />
+                                <h5>Java</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter3} alt="" />
+                                <h5>Bootstrap</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter3} alt="" />
+                                <h5>TailwindCss</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter2} alt="" />
+                                <h5>Node.js</h5>
+                            </div>
+                            <div className="item">
+                                <img src={meter2} alt="" />
+                                <h5>Redis</h5>
                             </div>
                       
                         </Carousel>
